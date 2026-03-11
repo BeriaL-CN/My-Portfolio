@@ -22,8 +22,8 @@ export const portfolioData = [
       liveDemo: "https://demo.chat-app.com",
     },
     // 定义 3D 位置，它们将作为 可交互旋转模型 的坐标
-    position: [-0.5, 0.55, -1.4],
-    model: "chat-bubble.glb",
+    position: [-1, 1.5, -2.6],
+    model: "Normal_4",
   },
   {
     id: "project-2-3d-viz",
@@ -33,11 +33,11 @@ export const portfolioData = [
     links: {
       github: "https://github.com/your/3d-viz",
     },
-    position: [-1, 0.55, -1.4],
-    model: "globe.glb",
+    position: [-2, 1.5, -2.6],
+    model: "Great_9",
   },
   {
-    id: "the-centenarian",
+    id: "project-3-the-centenarian",
     title: "The Centenarian",
     description:
       'The Centenarian is a project to create a "virtual cockpit" controller which is satisfying to use in controlling a spaceship in a 2D environment.',
@@ -45,7 +45,7 @@ export const portfolioData = [
     links: {
       github: "https://github.com/ArkansasLover/the-centenarian",
     },
-    position: [-1.5, 0.55, -1.4],
-    model: "shop-cart.glb",
+    position: [-3, 1.5, -2.6],
+    model: "Ultra_14",
   },
 ];

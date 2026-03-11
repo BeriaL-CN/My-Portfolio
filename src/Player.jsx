@@ -224,7 +224,7 @@ export function Player({ collidableObjects = [],props}) {
 
     });
     return (
-        <group ref={groupRef} {...props}>
+        <group ref={groupRef} name="Player" {...props}>
             {/* 渲染加载好的玩家模型 */}
             <primitive 
                 object={scene}

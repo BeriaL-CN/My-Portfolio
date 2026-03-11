@@ -48,6 +48,8 @@ function App() {
         >
           <ThreeDScene 
             onProjectSelect={setSelectedProject}
+            selectedProject={selectedProject}
+            onProjectClose={() => setSelectedProject(null)}
           />
         </Canvas>
       ) : (

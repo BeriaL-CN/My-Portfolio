@@ -11,7 +11,8 @@ export function useKeyboardControls() {
         ArrowUp: false,    // 方向键上 (向前)
         ArrowDown: false,  // 方向键下 (向后)
         ArrowLeft: false,  // 方向键左 (向左)
-        ArrowRight: false  // 方向键右 (向右)
+        ArrowRight: false, // 方向键右 (向右)
+        Space: false       // 空格键 (交互)
     });
 
     useEffect(() => {

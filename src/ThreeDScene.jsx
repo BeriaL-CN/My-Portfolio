@@ -6,71 +6,72 @@ import { OrbitControls } from '@react-three/drei';
 // 导入项目数据
 import { portfolioData } from './data/portfolioData';
 import { PokemonCenter } from './PokemonCenter';
+import { ProjectMarker } from './ProjectMarker';
 import { Player } from './Player';
 
 
-// --- 3D 组件：项目标记 ProjectMarker ---
-// 接收项目数据和 onSelect 回调函数作为 props
-const ProjectMarker = ({ data, onProjectSelect, ...props }) => {
-  const meshRef = useRef();
-  const [hovered, hover] = React.useState(false); // 悬停状态
-  const [isNear, setIsNear] = useState(false); // 玩家接近状态
-  // 注册为碰撞对象
-  const { onRegister } = props;
+// // --- 3D 组件：项目标记 ProjectMarker ---
+// // 接收项目数据和 onSelect 回调函数作为 props
+// const ProjectMarker = ({ data, onProjectSelect, ...props }) => {
+//   const meshRef = useRef();
+//   const [hovered, hover] = React.useState(false); // 悬停状态
+//   const [isNear, setIsNear] = useState(false); // 玩家接近状态
+//   // 注册为碰撞对象
+//   const { onRegister } = props;
 
-  useEffect(() => {
-    if (onRegister && meshRef.current) {
-      onRegister(meshRef.current);
-    }
-  }, [onRegister]); // 依赖项：onRegister 是来自父组件的稳定函数 (useCallback 确保)
+//   useEffect(() => {
+//     if (onRegister && meshRef.current) {
+//       onRegister(meshRef.current);
+//     }
+//   }, [onRegister]); // 依赖项：onRegister 是来自父组件的稳定函数 (useCallback 确保)
 
-  // useFrame：每一帧渲染时执行的动画逻辑
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      // 让标记稍微旋转，表明它是交互式的
-      meshRef.current.rotation.y += 0.5 * delta;
-      // 距离检测：获取玩家位置
-      const player = state.scene.getObjectByName('Player');
-      if (player) {
-        const distance = meshRef.current.position.distanceTo(player.position);
-        if (distance < 0.5) {
-          setIsNear(true)
-          hover(true);
-        }
-      }
-    }
-  });
+//   // useFrame：每一帧渲染时执行的动画逻辑
+//   useFrame((state, delta) => {
+//     if (meshRef.current) {
+//       // 让标记稍微旋转，表明它是交互式的
+//       meshRef.current.rotation.y += 0.5 * delta;
+//       // 距离检测：获取玩家位置
+//       const player = state.scene.getObjectByName('Player');
+//       if (player) {
+//         const distance = meshRef.current.position.distanceTo(player.position);
+//         if (distance < 0.5) {
+//           setIsNear(true)
+//           hover(true);
+//         }
+//       }
+//     }
+//   });
 
-  return (
-    <group position={props.position}>
-      {/* 浮动文字提示 */}
-      {isNear && (
-        <Html distanceFactor={10} position={[0, 0.5, 0]}>
-          <div className="tooltip">press blankspace to see {data.name}</div>
-        </Html>
-      )}
+//   return (
+//     <group position={props.position}>
+//       {/* 浮动文字提示 */}
+//       {isNear && (
+//         <Html distanceFactor={10} position={[0, 0.5, 0]}>
+//           <div className="tooltip">press blankspace to see {data.name}</div>
+//         </Html>
+//       )}
 
-      {/* 标记本体 */}
-      <mesh
-        {...props}
-        ref={meshRef}
-        // 根据悬停状态改变缩放和颜色，提供视觉反馈
-        scale={hovered ? 1.2 : 0.9}
-        onClick={() => onProjectSelect(data)} // 点击时，将项目数据传递给 App.jsx
-        onPointerOver={() => hover(true)} // 鼠标悬停
-        onPointerOut={() => hover(false)} // 鼠标离开
-      >
-        <icosahedronGeometry args={[0.3, 1]} />
-        {/* 颜色可以根据项目 ID 或标签动态设置 */}
-        <meshStandardMaterial color={hovered ? '#ff0000' : '#4e79a7'} />
-        {/* 占位：使用更高面数的二十面体 (Icosahedron)；调整 args[0]=半径, args[1]=细分级别 */}
-      </mesh>
-    </group>
-  );
-};
+//       {/* 标记本体 */}
+//       <mesh
+//         {...props}
+//         ref={meshRef}
+//         // 根据悬停状态改变缩放和颜色，提供视觉反馈
+//         scale={hovered ? 1.2 : 0.9}
+//         onClick={() => onProjectSelect(data)} // 点击时，将项目数据传递给 App.jsx
+//         onPointerOver={() => hover(true)} // 鼠标悬停
+//         onPointerOut={() => hover(false)} // 鼠标离开
+//       >
+//         <icosahedronGeometry args={[0.3, 1]} />
+//         {/* 颜色可以根据项目 ID 或标签动态设置 */}
+//         <meshStandardMaterial color={hovered ? '#ff0000' : '#4e79a7'} />
+//         {/* 占位：使用更高面数的二十面体 (Icosahedron)；调整 args[0]=半径, args[1]=细分级别 */}
+//       </mesh>
+//     </group>
+//   );
+// };
 
 
-const ThreeDScene = ({ onProjectSelect }) => {
+const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose }) => {
   // 用于缓存可碰撞网格的状态（Hooks 必须在组件内部声明）
   const [collidableMeshes, setCollidableMeshes] = useState([]);
 
@@ -129,7 +130,10 @@ const ThreeDScene = ({ onProjectSelect }) => {
           data={project}
           // 这里的 position 需要根据宝可梦中心的结构重新调整
           position={project.position}
+          // 传递交互回调和选中状态,确保 ProjectMarker 能正确响应玩家的交互
           onProjectSelect={onProjectSelect}
+          onProjectClose={onProjectClose}
+          selectedProject={selectedProject}
           onRegister={registerCollider}
         />
       ))}
