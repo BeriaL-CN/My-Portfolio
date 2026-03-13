@@ -1,6 +1,6 @@
 // src/Player.jsx
 
-import React, { useRef, useEffect } from 'react'; // 导入 useEffect
+import React, { useRef, useEffect, forwardRef } from 'react'; // 导入 useEffect
 import { useFrame } from '@react-three/fiber';
 // 导入 useAnimations
 import { useGLTF, useAnimations } from '@react-three/drei'; 
@@ -9,7 +9,7 @@ import * as THREE from 'three';
 
 const PLAYER_MODEL_PATH = 'models/player_model.glb'; 
 
-export function Player({ collidableObjects = [],props}) {
+export const Player = forwardRef(function Player({ collidableObjects = [],props}, ref) {
     const groupRef = useRef(); 
 
     // 相机和跟随逻辑的辅助对象
@@ -224,7 +224,7 @@ export function Player({ collidableObjects = [],props}) {
 
     });
     return (
-        <group ref={groupRef} name="Player" {...props}>
+        <group ref={(el) => { groupRef.current = el; if (ref) ref.current = el; }} name="Player" {...props}>
             {/* 渲染加载好的玩家模型 */}
             <primitive 
                 object={scene}
@@ -233,6 +233,6 @@ export function Player({ collidableObjects = [],props}) {
             />
         </group>
     );
-}
+});
 
 useGLTF.preload(PLAYER_MODEL_PATH);

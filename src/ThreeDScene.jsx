@@ -8,6 +8,7 @@ import { portfolioData } from './data/portfolioData';
 import { PokemonCenter } from './PokemonCenter';
 import { ProjectMarker } from './ProjectMarker';
 import { Player } from './Player';
+import * as THREE from 'three';
 
 
 // // --- 3D 组件：项目标记 ProjectMarker ---
@@ -75,6 +76,19 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose }) => {
   // 用于缓存可碰撞网格的状态（Hooks 必须在组件内部声明）
   const [collidableMeshes, setCollidableMeshes] = useState([]);
 
+  // 玩家位置引用（避免每帧查找）
+  const playerPositionRef = useRef(new THREE.Vector3(0, 0, 0));
+
+  // 玩家 ref，用于获取玩家位置
+  const playerRef = useRef();
+
+  // 每帧更新玩家位置
+  useFrame(() => {
+    if (playerRef.current) {
+      playerRef.current.getWorldPosition(playerPositionRef.current);
+    }
+  });
+
   // --- 核心：通用的注册函数 ---
   const registerCollider = useCallback((mesh) => {
     // 使用函数式更新，确保基于最新的状态进行添加
@@ -119,6 +133,7 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose }) => {
 
       {/* 2. 渲染玩家模型 */}
       <Player
+        ref={playerRef}
         collidableObjects={collidableMeshes} // 传递缓存的碰撞对象
         position={[0, 0, 1]} // 初始位置：位于场景中心附近，略微靠前
       />
@@ -135,6 +150,8 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose }) => {
           onProjectClose={onProjectClose}
           selectedProject={selectedProject}
           onRegister={registerCollider}
+          // 直接传递玩家位置，而不是让 ProjectMarker 查找
+          playerPosition={playerPositionRef}
         />
       ))}
     </>

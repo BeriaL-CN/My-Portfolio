@@ -47,7 +47,7 @@ const ProjectDetailsPanel = ({ project, onClose }) => {
             
             <hr style={{ border: '0', borderTop: '1px solid #eee' }}/>
 
-            <p><strong>Languages: </strong> {project.tags.join(', ')}</p>
+            <p><strong>Technologies: </strong> {project.tags.join(', ')}</p>
 
             <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
                 {project.links.liveDemo && (
