@@ -20,9 +20,15 @@ The site is deployed on GitHub Pages: https://berial-cn.github.io/my-portfolio/
 - Interactive project markers (Pokeballs)
 - Space key interaction for opening/closing project details
 
+✅ **2D Portfolio Website Complete** - A modern, responsive portfolio website with:
+- Full-screen homepage with floating scroll indicator
+- Clean project card layout with hover effects
+- Smooth navigation between sections
+- Modern gradient design and animations
+
 ### Core Features
 
-- 🎨 **Dual View Modes**: Seamless switching between immersive 3D view and traditional 2D list view
+- 🎨 **Dual View Modes**: Seamless switching between immersive 3D view and modern 2D portfolio view
 - 🌐 **3D Environment**: Pokemon Center themed scene rendered with Three.js (GLB models via `useGLTF`)
 - 🎮 **Third-Person Player**: Controllable character with smooth TPS camera follow, directional movement, and animation blending
 - ⌨️ **Input Controls**: Supports `W/A/S/D` and Arrow keys concurrently; Space key for project interaction
@@ -31,6 +37,7 @@ The site is deployed on GitHub Pages: https://berial-cn.github.io/my-portfolio/
 - 🎯 **Interactive Markers**: Pokeball-shaped project markers that respond to player proximity
 - ⚡ **High Performance**: Vite build tool with instant cold start and fast HMR
 - 📱 **Responsive Full-Screen**: Supports full viewport layout
+- 🎨 **2D Portfolio**: Modern single-page portfolio with full-screen homepage, project cards, and smooth navigation
 
 ### Technology Stack
 
@@ -55,6 +62,12 @@ my-portfolio/
 │   ├── main.jsx                  # App entry point
 │   ├── index.css                 # Global styles
 │   ├── components/
+│   │   ├── 2d/                   # 2D portfolio components
+│   │   │   ├── PortfolioHeader.jsx   # Navigation header
+│   │   │   ├── ProjectCard.jsx       # Project card component
+│   │   │   ├── HomeSection.jsx       # Full-screen homepage
+│   │   │   └── Portfolio2D.jsx       # Main 2D portfolio layout
+│   │   │   └── Portfolio2D.css       # 2D portfolio styles
 │   │   └── 3d/                  # 3D scene components
 │   │       ├── ThreeDScene.jsx   # 3D scene assembly
 │   │       ├── Player.jsx        # Player controller
@@ -173,9 +186,15 @@ MIT License
 - 精灵球形态的交互式项目标记
 - 空格键打开/关闭项目详情面板
 
+✅ **2D 作品集网站已完成** - 现代响应式作品集网站，包括：
+- 带浮动滚动指示器的全屏首页
+- 带悬停效果的简洁项目卡片布局
+- 各部分间的平滑导航
+- 现代渐变设计和动画效果
+
 ### 核心特性
 
-- 🎨 **双视图模式**：沉浸式 3D 视图与传统 2D 列表视图无缝切换
+- 🎨 **双视图模式**：沉浸式 3D 视图与现代 2D 作品集视图无缝切换
 - 🌐 **3D 环境**：宝可梦中心主题场景，基于 Three.js 渲染（通过 `useGLTF` 加载 GLB 模型）
 - 🎮 **第三人称玩家**：可控制角色，平滑 TPS 相机跟随、方向移动与动画混合
 - ⌨️ **输入支持**：同时支持 `W/A/S/D`、方向键；空格键与项目标记交互
@@ -184,6 +203,7 @@ MIT License
 - 🎯 **交互式标记**：精灵球形态的项目标记，响应玩家接近
 - ⚡ **高性能**：Vite 构建工具，极速冷启动和热更新
 - 📱 **全屏响应式**：支持全视口布局
+- 🎨 **2D 作品集**：现代单页作品集，包含全屏首页、项目卡片和流畅导航
 
 ---
 
@@ -212,6 +232,12 @@ my-portfolio/
 │   ├── main.jsx                  # 应用入口
 │   ├── index.css                 # 全局样式
 │   ├── components/
+│   │   ├── 2d/                   # 2D 作品集组件
+│   │   │   ├── PortfolioHeader.jsx   # 导航头部
+│   │   │   ├── ProjectCard.jsx       # 项目卡片组件
+│   │   │   ├── HomeSection.jsx       # 全屏首页
+│   │   │   └── Portfolio2D.jsx       # 主 2D 作品集布局
+│   │   │   └── Portfolio2D.css       # 2D 作品集样式
 │   │   └── 3d/                  # 3D 场景组件
 │   │       ├── ThreeDScene.jsx   # 3D 场景组件
 │   │       ├── Player.jsx        # 玩家控制器
