@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 // 导入项目数据
-import { portfolioData } from './data/portfolioData';
+import { portfolioData } from '../../data/portfolioData';
 import { PokemonCenter } from './PokemonCenter';
 import { ProjectMarker } from './ProjectMarker';
 import { Player } from './Player';

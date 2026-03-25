@@ -49,24 +49,32 @@ The site is deployed on GitHub Pages: https://berial-cn.github.io/my-portfolio/
 ```
 my-portfolio/
 ├── src/
-│   ├── App.jsx                 # Main app component (view switching, state management)
-│   ├── App.css                 # Application styles
-│   ├── ThreeDScene.jsx         # 3D scene assembly, loads environment and passes collidables
-│   ├── Player.jsx              # Player controller: movement, rotation, animations, camera follow
-│   ├── useKeyboardControls.jsx # Custom hook: tracks WASD + Arrow keys + Space
-│   ├── PokemonCenter.jsx       # Scene/environment model loader
-│   ├── ProjectMarker.jsx       # Interactive project markers (Pokeballs)
-│   ├── ProjectDetailsPanel.jsx # Project details modal panel
-│   ├── main.jsx                # App entry point
-│   ├── index.css               # Global styles
-│   └── data/portfolioData.js   # Project data configuration
-├── public/models/              # 3D GLB models
-├── public/                     # Public resources
-├── vite.config.js              # Vite configuration
-├── eslint.config.js            # ESLint configuration
-├── package.json                # Dependencies and scripts
-├── index.html                  # HTML entry
-└── README.md                   # Project documentation
+│   ├── App.jsx                    # Main app component (view switching, state management)
+│   ├── App.css                    # Application styles
+│   ├── ProjectDetailsPanel.jsx    # Project details modal panel
+│   ├── main.jsx                  # App entry point
+│   ├── index.css                 # Global styles
+│   ├── components/
+│   │   └── 3d/                  # 3D scene components
+│   │       ├── ThreeDScene.jsx   # 3D scene assembly
+│   │       ├── Player.jsx        # Player controller
+│   │       ├── ProjectMarker.jsx # Interactive project markers
+│   │       ├── PokemonCenter.jsx  # Environment model loader
+│   │       └── useKeyboardControls.jsx # Keyboard input hook
+│   ├── data/
+│   │   └── portfolioData.js      # Project data configuration
+│   └── assets/                   # Static resources
+├── public/
+│   ├── models/                   # 3D GLB models
+│   │   ├── player_model.glb
+│   │   ├── pokeballs.glb
+│   │   └── pokemon_center.glb
+│   └── vite.svg
+├── vite.config.js                # Vite configuration
+├── eslint.config.js              # ESLint configuration
+├── package.json                  # Dependencies and scripts
+├── index.html                    # HTML entry
+└── README.md                     # Project documentation
 ```
 
 ### Quick Start
@@ -198,24 +206,32 @@ MIT License
 ```
 my-portfolio/
 ├── src/
-│   ├── App.jsx                 # 主应用组件（视图切换、状态管理）
-│   ├── App.css                 # 应用样式
-│   ├── ThreeDScene.jsx         # 3D 场景组件
-│   ├── Player.jsx              # 玩家控制器：移动、旋转、动画、相机跟随
-│   ├── useKeyboardControls.jsx # 自定义 Hook：追踪 WASD + 方向键 + 空格键
-│   ├── PokemonCenter.jsx       # 场景/环境模型加载器
-│   ├── ProjectMarker.jsx       # 交互式项目标记（精灵球）
-│   ├── ProjectDetailsPanel.jsx # 项目详情弹窗面板
-│   ├── main.jsx                # 应用入口
-│   ├── index.css               # 全局样式
-│   └── data/portfolioData.js   # 项目数据配置
-├── public/models/              # 3D GLB 模型文件
-├── public/                     # 公共资源
-├── vite.config.js             # Vite 配置文件
-├── eslint.config.js           # ESLint 配置
+│   ├── App.jsx                    # 主应用组件（视图切换、状态管理）
+│   ├── App.css                    # 应用样式
+│   ├── ProjectDetailsPanel.jsx    # 项目详情弹窗面板
+│   ├── main.jsx                  # 应用入口
+│   ├── index.css                 # 全局样式
+│   ├── components/
+│   │   └── 3d/                  # 3D 场景组件
+│   │       ├── ThreeDScene.jsx   # 3D 场景组件
+│   │       ├── Player.jsx        # 玩家控制器
+│   │       ├── ProjectMarker.jsx # 交互式项目标记
+│   │       ├── PokemonCenter.jsx # 环境模型加载器
+│   │       └── useKeyboardControls.jsx # 键盘输入 Hook
+│   ├── data/
+│   │   └── portfolioData.js      # 项目数据配置
+│   └── assets/                   # 静态资源
+├── public/
+│   ├── models/                   # 3D GLB 模型文件
+│   │   ├── player_model.glb
+│   │   ├── pokeballs.glb
+│   │   └── pokemon_center.glb
+│   └── vite.svg
+├── vite.config.js               # Vite 配置文件
+├── eslint.config.js            # ESLint 配置
 ├── package.json               # 项目依赖和脚本
-├── index.html                 # HTML 入口
-└── README.md                 # 项目文档
+├── index.html                # HTML 入口
+└── README.md                # 项目文档
 ```
 
 ---
