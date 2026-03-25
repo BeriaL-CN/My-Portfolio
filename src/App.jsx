@@ -8,21 +8,30 @@ import ProjectDetailsPanel from './ProjectDetailsPanel';
 import Portfolio2D from './components/2d/Portfolio2D';
 
 function App() {
-  const [viewMode, setViewMode] = useState('3D');
+  const [viewMode, setViewMode] = useState('2D');
   const [selectedProject, setSelectedProject] = useState(null);
 
   const uiStyle = { 
     position: 'absolute', 
-    top: 20, 
+    bottom: 20, 
     left: 20, 
-    zIndex: 10, 
-    padding: '10px 15px', 
-    backgroundColor: 'white', 
-    border: '1px solid #ccc',
+    zIndex: 999, 
+    padding: '12px 24px', 
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    border: '2px solid rgba(102, 126, 234, 0.5)',
+    borderRadius: '25px',
     cursor: 'pointer',
-    color: 'black', 
-    fontWeight: 'bold'
+    color: '#667eea', 
+    fontWeight: '700',
+    fontSize: '14px',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    boxShadow: '0 4px 20px rgba(102, 126, 234, 0.3)',
+    backdropFilter: 'blur(10px)',
+    transition: 'all 0.3s ease',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
   };
+
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
@@ -31,8 +40,20 @@ function App() {
       <button 
         style={uiStyle}
         onClick={() => setViewMode(viewMode === '3D' ? '2D' : '3D')}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
+          e.target.style.borderColor = 'rgba(102, 126, 234, 0.8)';
+          e.target.style.transform = 'translateY(-2px)';
+          e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+          e.target.style.borderColor = 'rgba(102, 126, 234, 0.3)';
+          e.target.style.transform = 'translateY(0)';
+          e.target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.2)';
+        }}
       >
-        切换到 {viewMode === '3D' ? '2D' : '3D'} 视图
+        switch to the {viewMode === '3D' ? '2D' : '3D'} view
       </button>
 
       {/* 3D Canvas 区域 */}

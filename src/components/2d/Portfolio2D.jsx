@@ -45,6 +45,7 @@ const Portfolio2D = () => {
           </div>
         </section>
       </main>
+
     </div>
   );
 };
