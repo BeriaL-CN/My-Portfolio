@@ -8,12 +8,13 @@ import { useKeyboardControls } from './useKeyboardControls';
 
 const BALL_MODEL_PATH = 'models/pokeballs.glb'; 
 
-export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedProject, onRegister, ...props }) {
+export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedProject, onRegister, player, viewMode, ...props }) {
   const meshRef = useRef(); // 引用到标记的 mesh 对象
   const [hovered, hover] = useState(false); // 悬停状态
   const [isNear, setIsNear] = useState(false); // 玩家接近状态
   const keys = useKeyboardControls(); // 键盘控制状态
   const spacePressed = useRef(false); // 空格键按下状态，用于防止连续触发
+  const [reloadTrigger, setReloadTrigger] = useState(0); // 重新加载触发器
 
   // 1. 加载精灵球 GLB 模型
   const { scene } = useGLTF(BALL_MODEL_PATH);
@@ -37,29 +38,18 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
     return target;
   }, [scene, data.model]);
 
-  // 3. 强制重新加载模型的逻辑
-  useEffect(() => {
-    // 当组件挂载或重新挂载时，强制重新加载模型
-    const timeoutId = setTimeout(() => {
-      // 触发模型重新加载
-      useGLTF.clear(BALL_MODEL_PATH);
-      // 重新预加载模型
-      useGLTF.preload(BALL_MODEL_PATH);
-    }, 100);
-
-    return () => clearTimeout(timeoutId);
-  }, [data.model]);
-
   // 4. 视图切换时强制重新加载
   useEffect(() => {
-    // 监听视图模式变化，强制重新加载模型
-    const timeoutId = setTimeout(() => {
-      useGLTF.clear(BALL_MODEL_PATH);
-      useGLTF.preload(BALL_MODEL_PATH);
-    }, 50);
+    // 只在3D视图模式下且触发器变化时重新加载模型
+    if (viewMode === '3D') {
+      const timeoutId = setTimeout(() => {
+        useGLTF.clear(BALL_MODEL_PATH);
+        useGLTF.preload(BALL_MODEL_PATH);
+      }, 50);
 
-    return () => clearTimeout(timeoutId);
-  }, [scene]);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [reloadTrigger, viewMode]); // 依赖触发器和视图模式
 
   // 5. 注册碰撞（继承你之前的逻辑）
   useEffect(() => {
@@ -70,43 +60,40 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
 
   // 6. 每帧动画与距离检测
   useFrame((state) => {
-    if (meshRef.current) {
+    if (meshRef.current && player && player.current) {
       // 上下浮动动画
       meshRef.current.position.y += Math.sin(state.clock.getElapsedTime() * 2) * 0.002;
 
-      // 距离检测逻辑
-      const player = state.scene.getObjectByName('Player');
-      if (player) {
-        // 使用 getWorldPosition 确保在 group 嵌套下坐标依然准确
-        const worldPos = new THREE.Vector3();
-        meshRef.current.getWorldPosition(worldPos);
-        const distance = worldPos.distanceTo(player.position);
+      // 距离检测逻辑 - 使用传入的玩家对象引用
+      // 使用 getWorldPosition 确保在 group 嵌套下坐标依然准确
+      const worldPos = new THREE.Vector3();
+      meshRef.current.getWorldPosition(worldPos);
+      const distance = worldPos.distanceTo(player.current.position);
+      
+      // 接近判定
+      if (distance < 2) { // 稍微放宽判定范围，提升操作感
+        setIsNear(true);
+        hover(true);
         
-        // 接近判定
-        if (distance < 2) { // 稍微放宽判定范围，提升操作感
-          setIsNear(true);
-          hover(true);
-          
-          // 空格键交互：靠近时按空格切换面板开关状态
-          if (keys.Space && !spacePressed.current) {
-            spacePressed.current = true;
-            if (selectedProject) {
-              onProjectClose();
-            } else {
-              onProjectSelect(data);
-            }
+        // 空格键交互：靠近时按空格切换面板开关状态
+        if (keys.Space && !spacePressed.current) {
+          spacePressed.current = true;
+          if (selectedProject) {
+            onProjectClose();
+          } else {
+            onProjectSelect(data);
           }
-          
-          // 检测空格键释放
-          if (!keys.Space) {
-            spacePressed.current = false;
-          }
-        } else {
-          setIsNear(false);
-          spacePressed.current = false;
-          // 如果不是鼠标悬停，且人走开了，才取消 hover 状态
-          if (!hovered) hover(false); 
         }
+        
+        // 检测空格键释放
+        if (!keys.Space) {
+          spacePressed.current = false;
+        }
+      } else {
+        setIsNear(false);
+        spacePressed.current = false;
+        // 如果不是鼠标悬停，且人走开了，才取消 hover 状态
+        if (!hovered) hover(false); 
       }
     }
   });
@@ -131,20 +118,28 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
         </Html>
       )}
 
-      {/* 替换二十面体：使用 primitive 承载模型，并继承你所有的设置 */}
-      <primitive
-        object={ballModel}
-        ref={meshRef}
-        // 继承你之前的缩放逻辑
-        scale={hovered ? 0.15 : 0.15}
-        // 交互回调
+      {/* 使用单层 mesh 包装 primitive 来确保事件处理器正确绑定 */}
+      <mesh 
+        ref={meshRef} 
+        position={[0, 0, 0]}
+        scale={hovered ? 1 : 1}
         onClick={(e) => {
           e.stopPropagation();
+          console.log(`[ProjectMarker] ${data.title} - Mouse clicked`);
           onProjectSelect(data);
         }}
-        onPointerOver={() => hover(true)}
-        onPointerOut={() => hover(false)}
-      />
+        onPointerOver={() => {
+          console.log(`[ProjectMarker] ${data.title} - Mouse over`);
+          hover(true);
+        }}
+        onPointerOut={() => {
+          console.log(`[ProjectMarker] ${data.title} - Mouse out`);
+          hover(false);
+        }}
+      >
+        <primitive object={ballModel} wireframe={true} color="red"/>
+        <meshStandardMaterial wireframe={true} color="red" />
+      </mesh>
     </group>
   );
 }

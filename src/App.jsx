@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber'; 
 import ThreeDScene from './components/3d/ThreeDScene';
 import './App.css'; 
-import ProjectDetailsPanel from './ProjectDetailsPanel';
+import ProjectDetailsPanel from './components/3d/ProjectDetailsPanel';
 import Portfolio2D from './components/2d/Portfolio2D';
 
 function App() {
@@ -66,6 +66,7 @@ function App() {
             onProjectSelect={setSelectedProject}
             selectedProject={selectedProject}
             onProjectClose={() => setSelectedProject(null)}
+            viewMode={viewMode}
           />
         </Canvas>
       ) : (

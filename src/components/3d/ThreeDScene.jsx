@@ -150,8 +150,10 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose }) => {
           onProjectClose={onProjectClose}
           selectedProject={selectedProject}
           onRegister={registerCollider}
-          // 直接传递玩家位置，而不是让 ProjectMarker 查找
-          playerPosition={playerPositionRef}
+          // 传递玩家对象引用，而不是位置
+          player={playerRef}
+          // 传递视图模式，用于控制模型重新加载
+          viewMode="3D"
         />
       ))}
     </>
