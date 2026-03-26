@@ -18,7 +18,7 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
   // 1. 加载精灵球 GLB 模型
   const { scene } = useGLTF(BALL_MODEL_PATH);
 
-  // 2. 提取并克隆模型（确保 3 个 Marker 互不干扰）
+  // 2. 提取模型中的特定子对象（根据数据里的 model 字段），并进行必要的 transform 设置
   const ballModel = useMemo(() => {
     // 根据数据里的 ballName 提取，如果没有则选第一个
     const target = scene.getObjectByName(data.model);
@@ -37,14 +37,38 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
     return target;
   }, [scene, data.model]);
 
-  // 3. 注册碰撞（继承你之前的逻辑）
+  // 3. 强制重新加载模型的逻辑
+  useEffect(() => {
+    // 当组件挂载或重新挂载时，强制重新加载模型
+    const timeoutId = setTimeout(() => {
+      // 触发模型重新加载
+      useGLTF.clear(BALL_MODEL_PATH);
+      // 重新预加载模型
+      useGLTF.preload(BALL_MODEL_PATH);
+    }, 100);
+
+    return () => clearTimeout(timeoutId);
+  }, [data.model]);
+
+  // 4. 视图切换时强制重新加载
+  useEffect(() => {
+    // 监听视图模式变化，强制重新加载模型
+    const timeoutId = setTimeout(() => {
+      useGLTF.clear(BALL_MODEL_PATH);
+      useGLTF.preload(BALL_MODEL_PATH);
+    }, 50);
+
+    return () => clearTimeout(timeoutId);
+  }, [scene]);
+
+  // 5. 注册碰撞（继承你之前的逻辑）
   useEffect(() => {
     if (onRegister && meshRef.current) {
       onRegister(meshRef.current);
     }
   }, [onRegister]);
 
-  // 4. 每帧动画与距离检测
+  // 6. 每帧动画与距离检测
   useFrame((state) => {
     if (meshRef.current) {
       // 上下浮动动画
