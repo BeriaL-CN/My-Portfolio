@@ -1,6 +1,7 @@
 {
-  "name": "my-portfolio",
+  "name": "My-Portfolio",
   "private": true,
+  "homepage": "https://berial-cn.github.io/My-Portfolio",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
