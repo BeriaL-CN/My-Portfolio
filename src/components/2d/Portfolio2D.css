@@ -409,20 +409,110 @@
   }
 }
 
-@media (max-width: 480px) {
-  .header-title {
-    font-size: 1rem;
-  }
-  
-  .section-header h2 {
-    font-size: 1.5rem;
-  }
-  
-  .hero-content h2 {
-    font-size: 1.5rem;
-  }
-  
-  .card-title {
-    font-size: 1.1rem;
-  }
-}
+ /* Contact Section */
+ .contact-section {
+   animation: fadeInUp 0.6s ease-out 0.3s both;
+   padding: 4rem 2rem;
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   text-align: center;
+ }
+
+ .contact-section .section-header h2,
+ .contact-section .section-header p {
+   color: white;
+ }
+
+ .contact-content {
+   max-width: 800px;
+   margin: 0 auto;
+ }
+
+ .social-links {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   gap: 1.5rem;
+   margin-bottom: 3rem;
+ }
+
+ .social-link {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 0.75rem;
+   padding: 1rem 1.5rem;
+   background: rgba(255, 255, 255, 0.95);
+   border-radius: 12px;
+   text-decoration: none;
+   color: #333;
+   font-weight: 600;
+   transition: all 0.3s ease;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+   border: 1px solid rgba(255, 255, 255, 0.2);
+ }
+
+ .social-link:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+ }
+
+ .social-link svg {
+   width: 24px;
+   height: 24px;
+ }
+
+ .social-link.github:hover {
+   background: #333;
+   color: white;
+ }
+
+ .social-link.email:hover {
+   background: #ea4335;
+   color: white;
+ }
+
+ .social-link.linkedin:hover {
+   background: #0077b5;
+   color: white;
+ }
+
+ .social-link.twitter:hover {
+   background: #1da1f2;
+   color: white;
+ }
+
+ .contact-footer {
+   color: white;
+   font-size: 1.1rem;
+   opacity: 0.9;
+   max-width: 600px;
+   margin: 0 auto;
+   line-height: 1.8;
+ }
+
+ @media (max-width: 768px) {
+   .social-links {
+     grid-template-columns: 1fr 1fr;
+   }
+ }
+
+ @media (max-width: 480px) {
+   .header-title {
+     font-size: 1rem;
+   }
+   
+   .section-header h2 {
+     font-size: 1.5rem;
+   }
+   
+   .hero-content h2 {
+     font-size: 1.5rem;
+   }
+   
+   .card-title {
+     font-size: 1.1rem;
+   }
+   
+   .social-links {
+     grid-template-columns: 1fr;
+   }
+ }

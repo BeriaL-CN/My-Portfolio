@@ -37,13 +37,19 @@ const PortfolioHeader = ({ activeSection, onNavigate }) => {
           >
             Projects
           </button>
-          <button 
-            className={`nav-btn ${activeSection === 'about' ? 'active' : ''}`}
-            onClick={() => handleNavigation('about')}
-          >
-            About
-          </button>
-        </nav>
+           <button 
+             className={`nav-btn ${activeSection === 'about' ? 'active' : ''}`}
+             onClick={() => handleNavigation('about')}
+           >
+             About
+           </button>
+           <button 
+             className={`nav-btn ${activeSection === 'contact' ? 'active' : ''}`}
+             onClick={() => handleNavigation('contact')}
+           >
+             Contact
+           </button>
+         </nav>
       </div>
     </header>
   );

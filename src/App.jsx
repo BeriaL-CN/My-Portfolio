@@ -39,7 +39,11 @@ function App() {
       {/* 视图模式切换按钮 */}
       <button 
         style={uiStyle}
-        onClick={() => setViewMode(viewMode === '3D' ? '2D' : '3D')}
+        onClick={(e) => {
+          setViewMode(viewMode === '3D' ? '2D' : '3D');
+          // 防止按钮保持选中状态
+          e.target.blur();
+        }}
         onMouseEnter={(e) => {
           e.target.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
           e.target.style.borderColor = 'rgba(102, 126, 234, 0.8)';

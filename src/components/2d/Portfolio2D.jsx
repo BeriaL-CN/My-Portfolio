@@ -3,6 +3,7 @@ import { portfolioData } from '../../data/portfolioData';
 import ProjectCard from './ProjectCard';
 import PortfolioHeader from './PortfolioHeader';
 import HomeSection from './HomeSection';
+import ContactSection from './ContactSection';
 import './Portfolio2D.css';
 
 const Portfolio2D = () => {
@@ -43,10 +44,12 @@ const Portfolio2D = () => {
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
-        </section>
-      </main>
+         </section>
 
-    </div>
+         <ContactSection />
+       </main>
+
+     </div>
   );
 };
 

@@ -14,7 +14,6 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
   const [isNear, setIsNear] = useState(false); // 玩家接近状态
   const keys = useKeyboardControls(); // 键盘控制状态
   const spacePressed = useRef(false); // 空格键按下状态，用于防止连续触发
-  const [reloadTrigger, setReloadTrigger] = useState(0); // 重新加载触发器
 
   // 1. 加载精灵球 GLB 模型
   const { scene } = useGLTF(BALL_MODEL_PATH);
@@ -40,16 +39,17 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
 
   // 4. 视图切换时强制重新加载
   useEffect(() => {
-    // 只在3D视图模式下且触发器变化时重新加载模型
+    // 只在3D视图模式下重新加载模型
     if (viewMode === '3D') {
       const timeoutId = setTimeout(() => {
         useGLTF.clear(BALL_MODEL_PATH);
         useGLTF.preload(BALL_MODEL_PATH);
+        console.log(`[ProjectMarker] ${data.title} - Model reloaded for 3D view`);
       }, 50);
 
       return () => clearTimeout(timeoutId);
     }
-  }, [reloadTrigger, viewMode]); // 依赖触发器和视图模式
+  }, [viewMode]); // 只依赖视图模式
 
   // 5. 注册碰撞（继承你之前的逻辑）
   useEffect(() => {
@@ -121,7 +121,7 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
       {/* 使用单层 mesh 包装 primitive 来确保事件处理器正确绑定 */}
       <mesh 
         ref={meshRef} 
-        position={[0, 0, 0]}
+        position={[0, -0.1, 0]}
         scale={hovered ? 1 : 1}
         onClick={(e) => {
           e.stopPropagation();
@@ -137,8 +137,8 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
           hover(false);
         }}
       >
-        <primitive object={ballModel} wireframe={true} color="red"/>
-        <meshStandardMaterial wireframe={true} color="red" />
+        <primitive object={ballModel}/>
+        <meshStandardMaterial/>
       </mesh>
     </group>
   );
