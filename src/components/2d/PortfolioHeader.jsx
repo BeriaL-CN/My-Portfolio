@@ -32,16 +32,16 @@ const PortfolioHeader = ({ activeSection, onNavigate }) => {
             Home
           </button>
           <button 
-            className={`nav-btn ${activeSection === 'projects' ? 'active' : ''}`}
-            onClick={() => handleNavigation('projects')}
+            className={`nav-btn ${activeSection === 'about' ? 'active' : ''}`}
+            onClick={() => handleNavigation('about')}
           >
-            Projects
+            About
           </button>
            <button 
-             className={`nav-btn ${activeSection === 'about' ? 'active' : ''}`}
-             onClick={() => handleNavigation('about')}
+             className={`nav-btn ${activeSection === 'projects' ? 'active' : ''}`}
+             onClick={() => handleNavigation('projects')}
            >
-             About
+             Projects
            </button>
            <button 
              className={`nav-btn ${activeSection === 'contact' ? 'active' : ''}`}

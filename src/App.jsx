@@ -12,24 +12,23 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const uiStyle = { 
-    position: 'absolute', 
+    position: 'fixed', 
     bottom: 20, 
     left: 20, 
     zIndex: 999, 
     padding: '12px 24px', 
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    border: '2px solid rgba(102, 126, 234, 0.5)',
+    background: 'linear-gradient(180deg, #f8f0e0 0%, #e8e0d0 100%)',
+    border: '3px solid #b0a080',
     borderRadius: '25px',
     cursor: 'pointer',
-    color: '#667eea', 
+    color: '#605030', 
     fontWeight: '700',
     fontSize: '14px',
     textTransform: 'uppercase',
     letterSpacing: '1px',
-    boxShadow: '0 4px 20px rgba(102, 126, 234, 0.3)',
-    backdropFilter: 'blur(10px)',
-    transition: 'all 0.3s ease',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+    boxShadow: '0 4px 12px rgba(80, 60, 30, 0.2)',
+    transition: 'all 0.2s ease',
+    fontFamily: "'Courier New', monospace"
   };
 
 
@@ -45,16 +44,16 @@ function App() {
           e.target.blur();
         }}
         onMouseEnter={(e) => {
-          e.target.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
-          e.target.style.borderColor = 'rgba(102, 126, 234, 0.8)';
+          e.target.style.background = 'linear-gradient(180deg, #fffaf0 0%, #f8f0e0 100%)';
+          e.target.style.borderColor = '#c8b090';
           e.target.style.transform = 'translateY(-2px)';
-          e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
+          e.target.style.boxShadow = '0 6px 16px rgba(80, 60, 30, 0.3)';
         }}
         onMouseLeave={(e) => {
-          e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-          e.target.style.borderColor = 'rgba(102, 126, 234, 0.3)';
+          e.target.style.background = 'linear-gradient(180deg, #f8f0e0 0%, #e8e0d0 100%)';
+          e.target.style.borderColor = '#b0a080';
           e.target.style.transform = 'translateY(0)';
-          e.target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.2)';
+          e.target.style.boxShadow = '0 4px 12px rgba(80, 60, 30, 0.2)';
         }}
       >
         switch to the {viewMode === '3D' ? '2D' : '3D'} view
