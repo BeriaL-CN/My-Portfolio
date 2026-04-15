@@ -10,7 +10,7 @@ A creative personal portfolio website built with **React** and **Vite**, featuri
 
 ### Live Demo
 
-The site is deployed on GitHub Pages: https://berial-cn.github.io/my-portfolio/
+The site is deployed on GitHub Pages: https://berial-cn.github.io/My-Portfolio/
 
 ### Current Status
 
@@ -51,7 +51,7 @@ The site is deployed on GitHub Pages: https://berial-cn.github.io/my-portfolio/
 | **React Three Drei** | 10.7.7 | 3D Component Library |
 | **ESLint** | 9.39.1 | Code Quality |
 
-### Project Structure
+### Project Structure (Updated for My-Portfolio naming)
 
 ```
 my-portfolio/
@@ -150,7 +150,7 @@ npm run lint
 ```bash
 npm install --save-dev gh-pages
 # Add to package.json:
-"homepage": "https://berial-cn.github.io/my-portfolio",
+"homepage": "https://berial-cn.github.io/My-Portfolio",
 "scripts": {
   "predeploy": "npm run build",
   "deploy": "gh-pages -d dist"
@@ -165,7 +165,7 @@ MIT License
 ### Contact
 
 - GitHub: [@BeriaL-CN](https://github.com/BeriaL-CN)
-- Repository: [my-portfolio](https://github.com/BeriaL-CN/my-portfolio)
+- Repository: [My-Portfolio](https://github.com/BeriaL-CN/My-Portfolio)
 
 ---
 
@@ -177,7 +177,7 @@ MIT License
 
 ### 演示地址
 
-已部署到 GitHub Pages：https://berial-cn.github.io/my-portfolio/
+已部署到 GitHub Pages：https://berial-cn.github.io/My-Portfolio/
 
 ### 当前状态
 
@@ -326,7 +326,7 @@ npm run lint
 ## 📧 联系方式
 
 - GitHub: [@BeriaL-CN](https://github.com/BeriaL-CN)
-- 项目仓库：[my-portfolio](https://github.com/BeriaL-CN/my-portfolio)
+- 项目仓库：[My-Portfolio](https://github.com/BeriaL-CN/My-Portfolio)
 
 ---
 
