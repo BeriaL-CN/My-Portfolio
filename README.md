@@ -66,6 +66,7 @@ my-portfolio/
 │   │   │   ├── PortfolioHeader.jsx   # Navigation header
 │   │   │   ├── ProjectCard.jsx       # Project card component
 │   │   │   ├── HomeSection.jsx       # Full-screen homepage
+│   │   │   ├── ContactSection.jsx  # Contact section component
 │   │   │   └── Portfolio2D.jsx       # Main 2D portfolio layout
 │   │   │   └── Portfolio2D.css       # 2D portfolio styles
 │   │   └── 3d/                  # 3D scene components
@@ -131,7 +132,7 @@ npm run lint
 ### Usage Guide
 
 #### 1. **View Switching**
-- Click the button in top-left corner to toggle between 3D and 2D views
+- Click the fixed button at the bottom-left corner to toggle between 3D and 2D views
 
 #### 2. **3D Navigation**
 - **W / Arrow Up**: Move forward
@@ -176,7 +177,7 @@ MIT License
 
 ### 演示地址
 
-已部署到 GitHub Pages： https://berial-cn.github.io/my-portfolio/
+已部署到 GitHub Pages：https://berial-cn.github.io/my-portfolio/
 
 ### 当前状态
 
@@ -203,7 +204,7 @@ MIT License
 - 🎯 **交互式标记**：精灵球形态的项目标记，响应玩家接近
 - ⚡ **高性能**：Vite 构建工具，极速冷启动和热更新
 - 📱 **全屏响应式**：支持全视口布局
-- 🎨 **2D 作品集**：现代单页作品集，包含全屏首页、项目卡片和流畅导航
+- 🎨 **2D 作品集**：现代单页作品集，包含全屏首页、项目卡片、联系方式和流畅导航
 
 ---
 
@@ -236,6 +237,7 @@ my-portfolio/
 │   │   │   ├── PortfolioHeader.jsx   # 导航头部
 │   │   │   ├── ProjectCard.jsx       # 项目卡片组件
 │   │   │   ├── HomeSection.jsx       # 全屏首页
+│   │   │   ├── ContactSection.jsx    # 联系方式板块
 │   │   │   └── Portfolio2D.jsx       # 主 2D 作品集布局
 │   │   │   └── Portfolio2D.css       # 2D 作品集样式
 │   │   └── 3d/                  # 3D 场景组件
@@ -306,7 +308,7 @@ npm run lint
 ## 🎮 使用指南
 
 ### 1. 视图切换
-- 点击左上角按钮在 3D 和 2D 视图间切换
+- 点击左下角固定按钮在 3D 和 2D 视图间切换
 
 ### 2. 3D 导航
 - **W / ↑**：向前移动
@@ -324,8 +326,8 @@ npm run lint
 ## 📧 联系方式
 
 - GitHub: [@BeriaL-CN](https://github.com/BeriaL-CN)
-- 项目仓库: [my-portfolio](https://github.com/BeriaL-CN/my-portfolio)
+- 项目仓库：[my-portfolio](https://github.com/BeriaL-CN/my-portfolio)
 
 ---
 
-**最后更新**: 2026年3月
+**最后更新**: 2026 年 4 月
