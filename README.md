@@ -36,7 +36,7 @@ The site is deployed on GitHub Pages: https://berial-cn.github.io/My-Portfolio/
 - 🛡️ **Collision Detection**: Multi-ray sampling collision checks prevent walking through walls
 - 🎯 **Interactive Markers**: Pokeball-shaped project markers that respond to player proximity
 - ⚡ **High Performance**: Vite build tool with instant cold start and fast HMR
-- 📱 **Responsive Full-Screen**: Supports full viewport layout
+- 📱 **Mobile-Optimized**: Responsive design for mobile devices with optimized fonts, layouts, and touch interactions
 - 🎨 **2D Portfolio**: Modern single-page portfolio with full-screen homepage, project cards, and smooth navigation
 
 ### Technology Stack
@@ -203,7 +203,7 @@ MIT License
 - 🛡️ **碰撞检测**：多射线采样检测，防止穿墙
 - 🎯 **交互式标记**：精灵球形态的项目标记，响应玩家接近
 - ⚡ **高性能**：Vite 构建工具，极速冷启动和热更新
-- 📱 **全屏响应式**：支持全视口布局
+- 📱 **移动优化**：响应式设计，针对移动设备优化字体大小、布局和触控交互
 - 🎨 **2D 作品集**：现代单页作品集，包含全屏首页、项目卡片、联系方式和流畅导航
 
 ---

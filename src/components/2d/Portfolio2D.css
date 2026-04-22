@@ -1,26 +1,50 @@
-/* Portfolio2D.css */
+/* ========================================
+   Portfolio2D - 2D 作品集主样式文件
+   ========================================
+   
+   主要功能：
+   - 宝可梦主题配色（棕色系）
+   - 响应式移动优先设计
+   - 包含首页、项目卡片、联系方式等板块
+   - 支持 PC、平板、手机多端适配
+   
+   媒体查询断点：
+   - 768px: 平板到手机的分界线
+   - 480px: 小屏手机优化
+   - 769-1024px: 中型平板优化
+*/
 
+
+/* ========================================
+   全局基础样式 (Global Base Styles)
+   ======================================== */
+
+/* 容器主样式 - 宝可梦中心主题的格子背景 */
 .portfolio-2d {
   min-height: 100vh;
-  background: repeating-linear-gradient(
-    0deg,
-    #f0e8d0 0px,
-    #f0e8d0 64px,
-    #e8d8b8 64px,
-    #e8d8b8 128px
-  ),
-  repeating-linear-gradient(
-    90deg,
-    #f0e8d0 0px,
-    #f0e8d0 64px,
-    #e8d8b8 64px,
-    #e8d8b8 128px
-  );
+  /* 使用交叉网格线创建复古风格的背景纹理 */
+  background: repeating-linear-gradient(0deg,
+      #f0e8d0 0px,
+      #f0e8d0 64px,
+      #e8d8b8 64px,
+      #e8d8b8 128px),
+    repeating-linear-gradient(90deg,
+      #f0e8d0 0px,
+      #f0e8d0 64px,
+      #e8d8b8 64px,
+      #e8d8b8 128px);
   background-blend-mode: difference;
+
   color: #383020;
   font-family: 'Courier New', monospace;
 }
 
+
+/* ========================================
+   导航头部样式 (Header Navigation)
+   ======================================== */
+
+/* 粘性定位的导航栏，页面滚动时固定在顶部 */
 .portfolio-header {
   position: sticky;
   top: 0;
@@ -30,6 +54,7 @@
   box-shadow: 0 2px 8px rgba(100, 80, 50, 0.15);
 }
 
+/* 头部内容容器 - 居中布局 */
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -39,20 +64,24 @@
   align-items: center;
 }
 
+/* 网站标题 */
 .header-title {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 700;
   color: #8b4513;
+  /* 棕色主题色 */
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
   letter-spacing: 1px;
 }
 
+/* 导航按钮组容器 */
 .header-nav {
   display: flex;
   gap: 1rem;
 }
 
+/* 导航按钮样式 - 宝可梦精灵球风格 */
 .nav-btn {
   padding: 0.6rem 1.1rem;
   border: 2px solid #c8a070;
@@ -67,6 +96,7 @@
   box-shadow: 0 2px 4px rgba(140, 100, 60, 0.2);
 }
 
+/* 导航按钮悬停效果 - 上浮动画 */
 .nav-btn:hover {
   background: linear-gradient(180deg, #fff8e0 0%, #fae8c8 100%);
   transform: translateY(-2px);
@@ -74,21 +104,28 @@
   border-color: #d8b080;
 }
 
+/* 活动状态按钮 - 蓝色精灵球效果 */
 .nav-btn.active {
   background: linear-gradient(180deg, #60b8e8 0%, #4098c8 100%);
   color: white;
   border-color: #2078a8;
   box-shadow: 0 2px 6px rgba(60, 120, 170, 0.3);
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
+/* 主内容容器 */
 .portfolio-main {
   max-width: 100%;
   margin: 0 auto;
   padding: 0;
 }
 
-/* Projects Section */
+
+/* ========================================
+   项目展示区样式 (Projects Section)
+   ======================================== */
+
+/* 项目区域整体样式 - 淡黄色渐变背景 */
 .projects-section {
   animation: fadeInUp 0.6s ease-out;
   padding: 4rem 2rem;
@@ -97,11 +134,13 @@
   border-bottom: 1px solid #d0b890;
 }
 
+/* 区域标题容器 */
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
+/* 区域标题文字 */
 .section-header h2 {
   font-size: 2.8rem;
   margin: 0 0 1rem 0;
@@ -110,6 +149,7 @@
   font-weight: 700;
 }
 
+/* 区域描述文字 */
 .section-header p {
   font-size: 1.4rem;
   color: #666;
@@ -117,6 +157,7 @@
   font-weight: 600;
 }
 
+/* 项目网格布局 - 单列显示 */
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -125,7 +166,12 @@
   margin: 0 auto;
 }
 
-/* Project Card */
+
+/* ========================================
+   项目卡片样式 (Project Card)
+   ======================================== */
+
+/* 卡片主体样式 */
 .project-card {
   background: linear-gradient(180deg, #fffdf5 0%, #f8f0e0 100%);
   border-radius: 12px;
@@ -135,12 +181,14 @@
   border: 2px solid #e0d0b0;
 }
 
+/* 卡片悬停效果 - 上浮并加深阴影 */
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 24px rgba(120, 90, 50, 0.18);
   border-color: #90c8e8;
 }
 
+/* 卡片标题 */
 .card-title {
   font-size: 1.4rem;
   margin: 0 0 1rem 0;
@@ -148,6 +196,7 @@
   font-weight: 700;
 }
 
+/* 卡片描述文字 */
 .card-description {
   font-size: 1.1rem;
   color: #706050;
@@ -155,6 +204,7 @@
   margin: 0 0 1.5rem 0;
 }
 
+/* 标签容器 */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -162,6 +212,7 @@
   margin-bottom: 1.5rem;
 }
 
+/* 技术标签样式 - 蓝色精灵球风格 */
 .tag {
   background: linear-gradient(180deg, #70b8e0 0%, #5098c0 100%);
   color: white;
@@ -172,9 +223,10 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border: 2px solid #3078a0;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
+/* GitHub 链接按钮 - 金色风格 */
 .card-link {
   display: inline-block;
   background: linear-gradient(180deg, #e8c020 0%, #c8a000 100%);
@@ -185,22 +237,30 @@
   font-weight: 600;
   transition: all 0.1s ease;
   border: 3px solid #807000;
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
   font-size: 0.65rem;
   text-transform: uppercase;
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.4);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4);
 }
 
+/* 链接按钮悬停效果 */
 .card-link:hover {
   background: linear-gradient(180deg, #f8d030 0%, #e0b010 100%);
   transform: translateY(-1px);
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), 0 3px 6px rgba(0,0,0,0.3);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5), 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Home Section */
+
+/* ========================================
+   首页区域样式 (Home Section)
+   ======================================== */
+
+/* 全屏首页容器 */
 .home-section {
   position: relative;
   height: 100vh;
+  min-height: 600px;
+  /* 确保最小高度 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,20 +269,25 @@
   background-color: #e8dcc0;
 }
 
+/* 英雄内容容器 */
 .hero-content {
   text-align: center;
   z-index: 1;
   color: #5b4423;
   text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.6);
+  padding: 0 1rem;
 }
 
+/* 大标题 */
 .hero-title {
   font-size: 3.5rem;
   margin: 0 0 1rem 0;
   font-weight: 900;
   letter-spacing: 3px;
+  line-height: 1.2;
 }
 
+/* 副标题 */
 .hero-subtitle {
   font-size: 1.5rem;
   margin: 0 0 3rem 0;
@@ -230,6 +295,7 @@
   color: #706050;
 }
 
+/* 滚动指示器容器 */
 .scroll-indicator {
   position: absolute;
   bottom: 40px;
@@ -241,12 +307,17 @@
   gap: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  /* 移动端点击优化 */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
+/* 滚动指示器悬停效果 */
 .scroll-indicator:hover {
   transform: translateX(-50%) translateY(-5px);
 }
 
+/* 滚动提示文字 */
 .scroll-text {
   font-size: 1.1rem;
   font-weight: 600;
@@ -255,6 +326,7 @@
   opacity: 0.8;
 }
 
+/* 箭头容器 */
 .scroll-arrow {
   display: flex;
   flex-direction: column;
@@ -263,12 +335,14 @@
   animation: float 2s ease-in-out infinite;
 }
 
+/* 箭头线条 */
 .arrow-line {
   width: 2px;
   height: 30px;
   background: rgba(255, 255, 255, 0.6);
 }
 
+/* 箭头尖端 */
 .arrow-point {
   width: 0;
   height: 0;
@@ -277,16 +351,25 @@
   border-top: 8px solid rgba(255, 255, 255, 0.8);
 }
 
+/* 漂浮动画 - 用于箭头 */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
 }
 
-/* About Section */
+
+/* ========================================
+   关于区域样式 (About Section)
+   ======================================== */
+
+/* 关于区域容器 */
 .about-section {
   animation: fadeInUp 0.6s ease-out 0.2s both;
   padding: 4rem 2rem;
@@ -295,6 +378,7 @@
   border-bottom: 1px solid #c8b088;
 }
 
+/* 关于内容卡片 */
 .about-content {
   background: linear-gradient(180deg, #fffaf0 0%, #f8f0e0 100%);
   border-radius: 12px;
@@ -306,6 +390,7 @@
   margin: 0 auto;
 }
 
+/* 关于标题 */
 .about-content h2 {
   font-size: 2rem;
   margin: 0 0 1.5rem 0;
@@ -313,6 +398,7 @@
   font-weight: 700;
 }
 
+/* 关于描述 */
 .about-content p {
   font-size: 1.2rem;
   color: #706050;
@@ -320,7 +406,12 @@
   font-weight: 500;
 }
 
-/* View Toggle Button */
+
+/* ========================================
+   视图切换按钮样式 (View Toggle Button)
+   ======================================== */
+
+/* 固定在左下角的视图切换按钮 */
 .view-toggle-btn {
   position: fixed;
   bottom: 20px;
@@ -341,6 +432,7 @@
   font-family: 'Courier New', monospace;
 }
 
+/* 按钮悬停效果 */
 .view-toggle-btn:hover {
   background: linear-gradient(180deg, #fffaf0 0%, #f8f0e0 100%);
   border-color: #c8b090;
@@ -348,187 +440,420 @@
   box-shadow: 0 6px 16px rgba(80, 60, 30, 0.3);
 }
 
+/* 按钮按下效果 */
 .view-toggle-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(80, 60, 30, 0.2);
 }
 
-/* Animations */
+
+/* ========================================
+   动画定义 (Animations)
+   ======================================== */
+
+/* 向上淡入动画 - 用于所有内容区块 */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Responsive Design */
+
+/* ========================================
+   联系方式板块样式 (Contact Section)
+   ======================================== */
+
+/* 联系方式区域容器 */
+.contact-section {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, #e0d4b8 0%, #d8c8a8 100%);
+  border-top: 1px solid #c8b088;
+  text-align: center;
+}
+
+/* 联系方式区域标题 */
+.contact-section .section-header h2 {
+  color: #6b4423;
+  font-size: 1.8rem;
+}
+
+.contact-section .section-header p {
+  color: #706050;
+  font-size: 1rem;
+}
+
+/* 联系内容容器 */
+.contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 社交链接网格 */
+.social-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* 单个社交链接 */
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(180deg, #fffaf0 0%, #f8f0e0 100%);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #6b4423;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(120, 90, 50, 0.15);
+  border: 2px solid #e0d0b0;
+  font-size: 0.85rem;
+}
+
+/* 社交链接悬停效果 */
+.social-link:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(180deg, #fffdf5 0%, #faf5e8 100%);
+  box-shadow: 0 8px 20px rgba(120, 90, 50, 0.2);
+  border-color: #90c8e8;
+}
+
+/* 社交媒体图标大小 */
+.social-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* 特定平台悬停颜色 */
+.social-link.github:hover {
+  background: #333;
+  color: white;
+}
+
+.social-link.email:hover {
+  background: #ea4335;
+  color: white;
+}
+
+.social-link.linkedin:hover {
+  background: #0077b5;
+  color: white;
+}
+
+.social-link.twitter:hover {
+  background: #1da1f2;
+  color: white;
+}
+
+/* 联系方式页脚 */
+.contact-footer {
+  color: #706050;
+  font-size: 0.95rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+
+/* ========================================
+   响应式设计 (Responsive Design)
+   ======================================== */
+
+/* --- 平板/大屏手机 (最大宽度 768px) --- */
 @media (max-width: 768px) {
+
+  /* 头部容器 - 减小左右内边距 */
   .header-container {
-    padding: 1rem;
+    padding: 0.8rem;
   }
-  
+
   .header-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
-  
+
+  /* 导航按钮 - 减小尺寸并允许换行 */
+  .header-nav {
+    gap: 0.5rem;
+  }
+
   .nav-btn {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.55rem;
   }
-  
+
   .portfolio-main {
     padding: 1rem;
   }
-  
+
+  /* 隐藏滚动文字，只显示箭头 - 节省垂直空间 */
+  .scroll-text {
+    display: none;
+  }
+
+  .scroll-indicator {
+    bottom: 20px;
+  }
+
+  .scroll-arrow {
+    gap: 3px;
+  }
+
+  .arrow-line {
+    height: 20px;
+  }
+
+  .arrow-point {
+    border-left-width: 6px;
+    border-right-width: 6px;
+    border-top-width: 6px;
+  }
+
+  /* 区域内边距减小 */
+  .projects-section,
+  .about-section,
+  .contact-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
   .section-header h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
-  
+
   .section-header p {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
-  
+
+  .project-card {
+    padding: 1.25rem;
+  }
+
   .card-title {
     font-size: 1.25rem;
   }
-  
-  .hero-content h2 {
+
+  .card-description {
+    font-size: 1rem;
+  }
+
+  /* 首页字体缩小 */
+  .hero-title {
     font-size: 2rem;
   }
-  
-  .hero-content p {
+
+  .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .about-content {
     padding: 2rem;
   }
-  
+
   .about-content h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
-  
+
   .about-content p {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+
+  /* 社交链接双列布局 */
+  .social-links {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .social-link {
+    font-size: 0.8rem;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .contact-footer {
+    padding: 0 1rem;
   }
 }
 
- /* Contact Section */
- .contact-section {
-   animation: fadeInUp 0.6s ease-out 0.3s both;
-   padding: 4rem 2rem;
-   background: linear-gradient(180deg, #e0d4b8 0%, #d8c8a8 100%);
-   border-top: 1px solid #c8b088;
-   text-align: center;
- }
+/* --- 小屏手机 (最大宽度 480px) --- */
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: row;
+    /* 标题和导航左右排列*/
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+  }
 
- .contact-section .section-header h2 {
-   color: #6b4423;
-   font-size: 1.8rem;
- }
- 
- .contact-section .section-header p {
-   color: #706050;
-   font-size: 1rem;
- }
+  .header-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
 
- .contact-content {
-   max-width: 800px;
-   margin: 0 auto;
- }
+  /* 导航按钮容器 - 核心修改 */
+  .header-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    /* 强制不换行 */
+    overflow-x: auto;
+    /* 开启横向滚动 */
+    overflow-y: hidden;
+    /* 隐藏纵向滚动 */
+    width: 100vw;
+    /* 宽度占满视口 */
+    margin-left: -1rem;
+    /* 抵消父元素的 padding，使滑动能贴边 */
+    padding: 0.2rem 1rem;
+    /* 重新补回内部边距，确保按钮不贴死左边 */
+    gap: 0.8rem;
+    /* 按钮间的间距 */
 
- .social-links {
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-   gap: 1.5rem;
-   margin-bottom: 3rem;
- }
+    /* 隐藏滚动条 (可选，保持简洁) */
+    -webkit-overflow-scrolling: touch;
+    /* iOS 丝滑滚动 */
+    scrollbar-width: none;
+    /* Firefox 隐藏滚动条 */
 
- .social-link {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   gap: 0.75rem;
-   padding: 1rem 1.5rem;
-   background: linear-gradient(180deg, #fffaf0 0%, #f8f0e0 100%);
-   border-radius: 10px;
-   text-decoration: none;
-   color: #6b4423;
-   font-weight: 600;
-   transition: all 0.2s ease;
-   box-shadow: 0 4px 12px rgba(120, 90, 50, 0.15);
-   border: 2px solid #e0d0b0;
-   font-size: 0.85rem;
- }
+    /* 
+     * 使用渐变遮罩提示用户可以横向滑动
+     * 优化方案：两端透明中间可见，创建 fade-out 效果以提示可以滑动
+     * 从内容区域向两侧渐隐，让用户知道还有更多内容
+     */
+    -webkit-mask-image: linear-gradient(90deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 8%,
+        rgba(0, 0, 0, 0.6) 15%,
+        rgba(0, 0, 0, 1) 20%,
+        rgba(0, 0, 0, 1) 80%,
+        rgba(0, 0, 0, 0.6) 85%,
+        rgba(0, 0, 0, 0) 92%,
+        rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(90deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 8%,
+        rgba(0, 0, 0, 0.6) 15%,
+        rgba(0, 0, 0, 1) 20%,
+        rgba(0, 0, 0, 1) 80%,
+        rgba(0, 0, 0, 0.6) 85%,
+        rgba(0, 0, 0, 0) 92%,
+        rgba(0, 0, 0, 0) 100%);
+  }
 
- .social-link:hover {
-   transform: translateY(-3px);
-   background: linear-gradient(180deg, #fffdf5 0%, #faf5e8 100%);
-   box-shadow: 0 8px 20px rgba(120, 90, 50, 0.2);
-   border-color: #90c8e8;
- }
+  .header-nav::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari 隐藏滚动条 */
+  }
 
- .social-link svg {
-   width: 24px;
-   height: 24px;
- }
+  /* 导航按钮 - 调整为固定宽度以支持滑动感 */
+  .nav-btn {
+    flex: 0 0 auto;
+    /* 关键：防止按钮被挤压变形 */
+    min-width: auto;
+    /* 取消之前的最小宽度限制 */
+    white-space: nowrap;
+    /* 强制文字不换行 */
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    /* 胶囊形状在滑动栏中视觉效果更好 */
+  }
+}
 
- .social-link.github:hover {
-   background: #333;
-   color: white;
- }
+/* ========================================
+   响应式字体大小优化
+   ======================================== */
+/* 标题字号 */
+.section-header h2 {
+  font-size: 1.4rem;
+}
 
- .social-link.email:hover {
-   background: #ea4335;
-   color: white;
- }
+.section-header p {
+  font-size: 0.85rem;
+}
 
- .social-link.linkedin:hover {
-   background: #0077b5;
-   color: white;
- }
+.hero-title {
+  font-size: 1.8rem;
+}
 
- .social-link.twitter:hover {
-   background: #1da1f2;
-   color: white;
- }
+.hero-subtitle {
+  font-size: 1rem;
+}
 
- .contact-footer {
-   color: #706050;
-   font-size: 0.95rem;
-   max-width: 600px;
-   margin: 0 auto;
-   line-height: 1.8;
- }
+.card-title {
+  font-size: 1.1rem;
+}
 
- @media (max-width: 768px) {
-   .social-links {
-     grid-template-columns: 1fr 1fr;
-   }
- }
+.card-description {
+  font-size: 0.9rem;
+}
 
- @media (max-width: 480px) {
-   .header-title {
-     font-size: 1rem;
-   }
-   
-   .section-header h2 {
-     font-size: 1.5rem;
-   }
-   
-   .hero-content h2 {
-     font-size: 1.5rem;
-   }
-   
-   .card-title {
-     font-size: 1.1rem;
-   }
-   
-   .social-links {
-     grid-template-columns: 1fr;
-   }
- }
+/* 标签字号最小化 */
+.tag {
+  font-size: 0.5rem;
+  padding: 0.25rem 0.45rem;
+}
+
+.card-link {
+  font-size: 0.6rem;
+  padding: 0.5rem 1rem;
+}
+
+/* 联系方式标题 */
+.contact-section .section-header h2 {
+  font-size: 1.4rem;
+}
+
+.contact-section .section-header p {
+  font-size: 0.8rem;
+}
+
+/* 社交链接 */
+.social-link {
+  font-size: 0.75rem;
+  padding: 0.85rem 1.2rem;
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 视图切换按钮适配 - 扩展到整个底部 */
+.view-toggle-btn {
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  padding: 10px 16px;
+  font-size: 11px;
+}
+
+/* --- 中型平板 (769px - 1024px) --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .header-container {
+    max-width: 90%;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .projects-section,
+  .about-section,
+  .contact-section {
+    padding: 3rem 2rem;
+  }
+}
