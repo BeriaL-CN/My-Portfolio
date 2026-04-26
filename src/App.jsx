@@ -1,8 +1,9 @@
 // src/App.jsx
 
-import React, { useState } from 'react'; 
+import React, { useState, useCallback, useEffect } from 'react'; 
 import { Canvas } from '@react-three/fiber'; 
 import ThreeDScene from './components/3d/ThreeDScene';
+import { VirtualJoystick } from './components/3d/VirtualJoystick';
 import './App.css'; 
 import ProjectDetailsPanel from './components/3d/ProjectDetailsPanel';
 import Portfolio2D from './components/2d/Portfolio2D';
@@ -10,6 +11,28 @@ import Portfolio2D from './components/2d/Portfolio2D';
 function App() {
   const [viewMode, setViewMode] = useState('2D');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [joystickInput, setJoystickInput] = useState({ x: 0, y: 0 });
+  
+  // 检测是否为移动端设备
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+      setIsMobile(mobileRegex.test(navigator.userAgent) || window.innerWidth <= 768);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
+  
+  // 处理摇杆移动
+  const handleJoystickMove = useCallback((input) => {
+    setJoystickInput(input);
+  }, []);
 
   const uiStyle = { 
     position: 'fixed', 
@@ -61,17 +84,25 @@ function App() {
 
       {/* 3D Canvas 区域 */}
       {viewMode === '3D' ? (
-        <Canvas
-          camera={{ position: [0, 7, 12], fov: 50 }}
-          style={{ background: '#000000ff' }}
-        >
-          <ThreeDScene 
-            onProjectSelect={setSelectedProject}
-            selectedProject={selectedProject}
-            onProjectClose={() => setSelectedProject(null)}
-            viewMode={viewMode}
-          />
-        </Canvas>
+        <>
+          <Canvas
+            camera={{ position: [0, 7, 12], fov: 50 }}
+            style={{ background: '#000000ff' }}
+          >
+            <ThreeDScene 
+              onProjectSelect={setSelectedProject}
+              selectedProject={selectedProject}
+              onProjectClose={() => setSelectedProject(null)}
+              viewMode={viewMode}
+              onJoystickMove={handleJoystickMove}
+              joystickInput={joystickInput}
+            />
+          </Canvas>
+          {/* 虚拟摇杆 - 仅在移动端显示 */}
+          {isMobile && (
+            <VirtualJoystick onMove={handleJoystickMove} />
+          )}
+        </>
       ) : (
         // 2D Portfolio 视图
         <Portfolio2D />

@@ -258,7 +258,8 @@
 /* 全屏首页容器 */
 .home-section {
   position: relative;
-  height: 100vh;
+  /* 使用动态视口高度单位，确保移动端占满完整屏幕（避开浏览器地址栏）*/
+  height: 100dvh;
   min-height: 600px;
   /* 确保最小高度 */
   display: flex;
@@ -592,15 +593,6 @@
     padding: 0.35rem 0.55rem;
   }
 
-  .portfolio-main {
-    padding: 1rem;
-  }
-
-  /* 隐藏滚动文字，只显示箭头 - 节省垂直空间 */
-  .scroll-text {
-    display: none;
-  }
-
   .scroll-indicator {
     bottom: 20px;
   }
@@ -688,6 +680,18 @@
 
 /* --- 小屏手机 (最大宽度 480px) --- */
 @media (max-width: 480px) {
+  /* 移除首页容器两侧的 gap，使其占满全屏 */
+  .home-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* 滚动指示器 - 调整位置高于视图切换按钮，避免被遮挡
+     视图切换按钮底部位置为 10px，因此将 scroll-indicator 设为 70px */
+  .scroll-indicator {
+    bottom: 100px;
+  }
+
   .header-container {
     flex-direction: row;
     /* 标题和导航左右排列*/
@@ -709,8 +713,8 @@
     /* 开启横向滚动 */
     overflow-y: hidden;
     /* 隐藏纵向滚动 */
-    width: 100vw;
-    /* 宽度占满视口 */
+    width: 100%;
+    /* 使用 100% 而非 100vw，避免计算问题 */
     margin-left: -1rem;
     /* 抵消父元素的 padding，使滑动能贴边 */
     padding: 0.2rem 1rem;
@@ -767,6 +771,7 @@
     border-radius: 20px;
     /* 胶囊形状在滑动栏中视觉效果更好 */
   }
+
 }
 
 /* ========================================
@@ -828,14 +833,6 @@
   height: 20px;
 }
 
-/* 视图切换按钮适配 - 扩展到整个底部 */
-.view-toggle-btn {
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  padding: 10px 16px;
-  font-size: 11px;
-}
 
 /* --- 中型平板 (769px - 1024px) --- */
 @media (min-width: 769px) and (max-width: 1024px) {

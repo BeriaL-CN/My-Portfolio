@@ -72,7 +72,7 @@ import * as THREE from 'three';
 // };
 
 
-const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose }) => {
+const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose, onJoystickMove, joystickInput }) => {
   // 用于缓存可碰撞网格的状态（Hooks 必须在组件内部声明）
   const [collidableMeshes, setCollidableMeshes] = useState([]);
 
@@ -100,6 +100,7 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose }) => {
   }, [setCollidableMeshes]);
   // 注意：这里的 registerCollider 是稳定的，可以安全地作为 prop 传递。
 
+  
   // 接收 PokemonCenter 模型网格的回调
   const handleModelLoaded = useCallback((filteredMeshes) => {
     setCollidableMeshes(prevMeshes => {
@@ -135,10 +136,12 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose }) => {
       <Player
         ref={playerRef}
         collidableObjects={collidableMeshes} // 传递缓存的碰撞对象
+        joystickInput={joystickInput} // 传递摇杆输入
         position={[0, 0, 1]} // 初始位置：位于场景中心附近，略微靠前
       />
+      
 
-      {/* 3. 渲染您的项目标记 (Marker) */}
+      {/* 4. 渲染您的项目标记 (Marker) */}
       {portfolioData.map((project) => (
         <ProjectMarker
           key={project.id}

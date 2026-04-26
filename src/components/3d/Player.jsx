@@ -9,15 +9,15 @@ import * as THREE from 'three';
 
 const PLAYER_MODEL_PATH = 'models/player_model.glb'; 
 
-export const Player = forwardRef(function Player({ collidableObjects = [],props}, ref) {
+export const Player = forwardRef(function Player({ collidableObjects = [], joystickInput = null, props }, ref) {
     const groupRef = useRef(); 
 
     // 相机和跟随逻辑的辅助对象
     const cameraTarget = useRef(new THREE.Vector3());
     const cameraPositionTarget = useRef(new THREE.Vector3()); // 目标相机位置
-    const cameraDistanceX = 0;  // 相机在X轴上的偏移（可选，用于斜角）
+    const cameraDistanceX = 0;  // 相机在 X 轴上的偏移（可选，用于斜角）
     const cameraDistanceY = 6;  // 相机的高度 (俯视)
-    const cameraDistanceZ = 7;  // 相机在Z轴上的偏移
+    const cameraDistanceZ = 7;  // 相机在 Z 轴上的偏移
     const cameraSmoothness = 0.05; // 相机跟随的平滑度
 
 
@@ -120,35 +120,60 @@ export const Player = forwardRef(function Player({ collidableObjects = [],props}
         let nextY = groupRef.current.position.y;
         let nextZ = groupRef.current.position.z;
         
-        // W / ArrowUp (前后移动 - 向前)
-        if (keys.KeyW || keys.ArrowUp) {
-            targetRot = Math.PI;
-            nextZ -= movementSpeed;
-            moved = true;
-        } else if (keys.KeyS || keys.ArrowDown) {
-            // S / ArrowDown (向后)
-            targetRot = 0;
-            nextZ += movementSpeed;
-            moved = true;
-        }
+        // 优先处理摇杆输入（移动端），其次处理键盘输入（桌面端）
+        const useJoystick = joystickInput !== null && (Math.abs(joystickInput.x) > 0.1 || Math.abs(joystickInput.y) > 0.1);
         
-        // A / ArrowLeft 和 D / ArrowRight (左右移动)
-        if (keys.KeyA || keys.ArrowLeft) {
-            // TPS 视角，平滑旋转到目标方向
-            targetRot = -Math.PI / 2;
-            nextX -= movementSpeed;
-            moved = true; 
-        } else if (keys.KeyD || keys.ArrowRight) {
-            targetRot = Math.PI / 2;
-            nextX += movementSpeed;
-            moved = true;
+        if (useJoystick) {
+            // 使用摇杆控制 - 支持任意方向移动
+            // joystickInput.y: -1 是向上（前进），1 是向下（后退）
+            // joystickInput.x: -1 是向左，1 是向右
+            
+            // 计算移动向量
+            const moveX = joystickInput.x;
+            const moveZ = joystickInput.y; // 不翻转 Y 轴
+            
+            // 只有当输入足够大时才移动
+            if (Math.sqrt(moveX * moveX + moveZ * moveZ) > 0.1) {
+                // 计算移动方向（弧度）
+                targetRot = Math.atan2(moveX, moveZ);
+                
+                // 应用移动（考虑移动速度）
+                nextX += movementSpeed * moveX;
+                nextZ += movementSpeed * moveZ;
+                moved = true;
+            }
+        } else {
+            // 使用键盘控制
+            // W / ArrowUp (前后移动 - 向前)
+            if (keys.KeyW || keys.ArrowUp) {
+                targetRot = Math.PI;
+                nextZ -= movementSpeed;
+                moved = true;
+            } else if (keys.KeyS || keys.ArrowDown) {
+                // S / ArrowDown (向后)
+                targetRot = 0;
+                nextZ += movementSpeed;
+                moved = true;
+            }
+            
+            // A / ArrowLeft 和 D / ArrowRight (左右移动)
+            if (keys.KeyA || keys.ArrowLeft) {
+                // TPS 视角，平滑旋转到目标方向
+                targetRot = -Math.PI / 2;
+                nextX -= movementSpeed;
+                moved = true; 
+            } else if (keys.KeyD || keys.ArrowRight) {
+                targetRot = Math.PI / 2;
+                nextX += movementSpeed;
+                moved = true;
+            }
         }
         
         // 碰撞检测：改为多射线采样
         const playerPos = new THREE.Vector3(nextX, nextY, nextZ);
         let hasCollision = false;
 
-        // 使用传入的可碰撞对象数组，在threedscene.jsx中传入
+        // 使用传入的可碰撞对象数组，在 threedscene.jsx 中传入
 
         // 方向与距离
         const moveDir = playerPos.clone().sub(groupRef.current.position);

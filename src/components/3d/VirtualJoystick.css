@@ -1,0 +1,95 @@
+/* 
+ * 虚拟摇杆样式
+ * 注意：此组件仅在移动端使用
+ */
+
+/* 默认隐藏，只在移动端显示 */
+.virtual-joystick {
+    display: none;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .virtual-joystick {
+        display: block;
+        position: fixed;
+        bottom: 80px;
+        right: 20px; /* 放在右侧 */
+        left: auto;
+        transform: none;
+        width: 140px;
+        height: 140px;
+        max-width: 200px;
+        max-height: 200px;
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+        z-index: 1000;
+    }
+    
+    .joystick-base {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .joystick-stick {
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+        min-height: 70px;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+        border-radius: 50%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.05s ease-out; /* 提高响应速度 */
+        aspect-ratio: 1 / 1; /* 强制保持 1:1 宽高比 */
+    }
+    
+    .joystick-stick-inner {
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    
+    /* 隐藏方向指示器 */
+    .joystick-direction-indicator {
+        display: none;
+    }
+}
+
+/* 小屏幕设备 */
+@media (max-width: 480px) {
+    .virtual-joystick {
+        bottom: 70px;
+        width: 120px;
+        height: 120px;
+    }
+    
+    .joystick-base {
+        border-width: 2px;
+    }
+    
+    .joystick-stick {
+        width: 60px;
+        height: 60px;
+        aspect-ratio: 1 / 1; /* 强制保持 1:1 宽高比 */
+        transition: transform 0.03s ease-out; /* 进一步提高响应速度 */
+    }
+    
+    .joystick-stick-inner {
+        width: 35px;
+        height: 35px;
+    }
+}
