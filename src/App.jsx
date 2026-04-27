@@ -96,6 +96,7 @@ function App() {
               viewMode={viewMode}
               onJoystickMove={handleJoystickMove}
               joystickInput={joystickInput}
+              isMobile={isMobile}
             />
           </Canvas>
           {/* 虚拟摇杆 - 仅在移动端显示 */}

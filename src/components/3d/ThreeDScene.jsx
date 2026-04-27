@@ -72,7 +72,7 @@ import * as THREE from 'three';
 // };
 
 
-const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose, onJoystickMove, joystickInput }) => {
+const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose, onJoystickMove, joystickInput, isMobile }) => {
   // 用于缓存可碰撞网格的状态（Hooks 必须在组件内部声明）
   const [collidableMeshes, setCollidableMeshes] = useState([]);
 
@@ -157,6 +157,8 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose, onJoyst
           player={playerRef}
           // 传递视图模式，用于控制模型重新加载
           viewMode="3D"
+          // 传递设备类型信息
+          isMobile={isMobile}
         />
       ))}
     </>

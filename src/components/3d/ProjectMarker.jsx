@@ -8,7 +8,7 @@ import { useKeyboardControls } from './useKeyboardControls';
 
 const BALL_MODEL_PATH = 'models/pokeballs.glb'; 
 
-export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedProject, onRegister, player, viewMode, ...props }) {
+export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedProject, onRegister, player, viewMode, isMobile, ...props }) {
   const meshRef = useRef(); // 引用到标记的 mesh 对象
   const [hovered, hover] = useState(false); // 悬停状态
   const [isNear, setIsNear] = useState(false); // 玩家接近状态
@@ -101,8 +101,8 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
   return (
     // 保持你之前的 group 结构和 position 传入
     <group position={props.position}>
-      {/* 浮动文字提示 */}
-      {isNear && !selectedProject && (
+      {/* 浮动文字提示 - 桌面端 */}
+      {isNear && !selectedProject && !isMobile && (
         <Html distanceFactor={10} position={[0, 0.8, 0]} center>
           <div style={{
             background: 'rgba(0,0,0,0.7)',
@@ -113,7 +113,24 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
             whiteSpace: 'nowrap',
             pointerEvents: 'none'
           }}>
-            Press Space to see <br></br>{data.title}
+            Press Space to see <br/>{data.title}
+          </div>
+        </Html>
+      )}
+      
+      {/* 浮动文字提示 - 移动端 */}
+      {isNear && !selectedProject && isMobile && (
+        <Html distanceFactor={10} position={[0, 0.8, 0]} center>
+          <div style={{
+            background: 'rgba(0,0,0,0.7)',
+            color: 'white',
+            padding: '4px 10px',
+            borderRadius: '4px',
+            fontSize: '12px',
+            whiteSpace: 'nowrap',
+            pointerEvents: 'none'
+          }}>
+            Tap to see <br/>{data.title}
           </div>
         </Html>
       )}
