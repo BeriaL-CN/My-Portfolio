@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { portfolioData } from '../../data/portfolioData';
+// Project, about, and profile copy are normalized in one shared data adapter.
 import ProjectCard from './ProjectCard';
 import PortfolioHeader from './PortfolioHeader';
 import HomeSection from './HomeSection';
 import ContactSection from './ContactSection';
 import './Portfolio2D.css';
 
-const Portfolio2D = () => {
+const Portfolio2D = ({ portfolioData, portfolioMeta, contactData }) => {
   const [activeSection, setActiveSection] = useState('home');
 
   const handleNavigate = (section) => {
@@ -16,20 +16,19 @@ const Portfolio2D = () => {
   return (
     <div className="portfolio-2d">
       <PortfolioHeader 
+        portfolioMeta={portfolioMeta}
         activeSection={activeSection} 
         onNavigate={handleNavigate} 
       />
       
       <main className="portfolio-main">
-        <HomeSection />
+        <HomeSection portfolioMeta={portfolioMeta} />
         
         <section className="about-section" id="about">
           <div className="about-content">
             <h2>About Me</h2>
             <p>
-              I'm a dedicated developer with experience in various technologies 
-              and frameworks. I love creating user-friendly applications and 
-              solving complex problems with elegant solutions.
+              {portfolioMeta.summary}
             </p>
           </div>
         </section>
@@ -46,7 +45,7 @@ const Portfolio2D = () => {
           </div>
          </section>
 
-         <ContactSection />
+         <ContactSection contactData={contactData} />
        </main>
 
      </div>

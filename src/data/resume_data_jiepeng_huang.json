@@ -1,0 +1,374 @@
+{
+  "basics": {
+    "name": "Jiepeng Huang",
+    "label": "Full Stack Engineer | Technical Product Manager | IT Specialist",
+    "email": "silver.h.jack@gmail.com",
+    "phone": "+61 423445623",
+    "url": "https://www.linkedin.com/in/berial-huang/",
+    "summary": "Forward-thinking Master of IT graduate with a strong technical foundation in Full-Stack development and Cloud infrastructure. Proven ability to architect scalable web applications and bridge the gap between complex technical backends and high-performance frontends. Seeking to leverage a GPA of 6.18/7.0 and expertise in React, Node.js, and Python to deliver reliable software solutions in a dynamic Developer role.",
+    "location": {
+      "address": "Robertson",
+      "city": "Brisbane",
+      "region": "QLD",
+      "postalCode": "4109",
+      "countryCode": "AU"
+    },
+    "visa": "Temporary Graduate Visa (Subclass 485) - Full work rights",
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "url": "https://www.linkedin.com/in/berial-huang/"
+      },
+      {
+        "network": "GitHub",
+        "url": "https://github.com/BeriaL-CN/"
+      }
+    ]
+  },
+  "education": [
+    {
+      "institution": "The University of Queensland",
+      "area": "Master of Information Technology",
+      "studyType": "Master",
+      "startDate": "2023-02",
+      "endDate": "2024-12",
+      "score": "6.18/7.0",
+      "location": "Brisbane, Australia"
+    },
+    {
+      "institution": "Guangzhou University",
+      "area": "Communication Engineering",
+      "studyType": "Bachelor",
+      "startDate": "2015-07",
+      "endDate": "2019-07",
+      "location": "Guangzhou, China",
+      "courses": [
+        "Computer Networks",
+        "Communication Principles",
+        "Principles of Microcontrollers"
+      ]
+    }
+  ],
+  "work": [
+    {
+      "company": "FABC Accounting",
+      "position": "Web Developer (Freelance)",
+      "location": "Brisbane, Australia (Hybrid)",
+      "startDate": "2026-04",
+      "endDate": "Present",
+      "tags": [
+        "developer",
+        "freelance",
+        "wordpress",
+        "frontend",
+        "cloud",
+        "ai-tooling"
+      ],
+      "highlights": [
+        "Platform Ownership & CMS: End-to-end management of the firm's client-facing WordPress platform; independently developed and restyled 20+ responsive compliance layouts and managed corporate article publication.",
+        "Frontend Engineering: Engineered custom HTML5 and CSS3 overrides to bypass template rigidity, successfully resolving complex multi-device responsive rendering bugs and standardizing web components.",
+        "Cloud Infrastructure: Administered production site deployment and domain assets on SiteGround, applying caching layers and asset compression to optimize web loading speeds and technical security.",
+        "AI-Powered Workflows: Leveraged an AI-native workflow (Cursor/Claude Code) for rapid layout debugging, while utilizing generative AI tools to design high-quality digital marketing posters and media collateral."
+      ]
+    },
+    {
+      "company": "HD Education",
+      "position": "IT Courses Tutor",
+      "location": "Brisbane, Australia",
+      "startDate": "2025-02",
+      "endDate": "Present",
+      "tags": [
+        "developer",
+        "academic",
+        "it-support",
+        "technical"
+      ],
+      "highlights": [
+        "Strategic Mentorship: Mentoring 20+ international students in Software Engineering and Database Design, translating complex architectural concepts into actionable code implementations.",
+        "Code Review & Strategy: Developed comprehensive technical resources and debugging strategies, significantly improving students' coding proficiency and project success rates."
+      ]
+    },
+    {
+      "company": "Super Chain",
+      "position": "Retail All-rounder",
+      "location": "Brisbane, Australia",
+      "startDate": "2025-01",
+      "endDate": "Present",
+      "tags": [
+        "service",
+        "customer-support",
+        "local-exp"
+      ],
+      "highlights": [
+        "Managing daily store activities including inventory coordination and trilingual customer service.",
+        "Performing accurate data entry and cash handling using POS systems during peak hours."
+      ]
+    },
+    {
+      "company": "Haidilao Hot Pot",
+      "position": "Kitchen Hand",
+      "location": "Brisbane, Australia",
+      "startDate": "2025-01",
+      "endDate": "2025-09",
+      "tags": [
+        "service",
+        "reliability"
+      ],
+      "highlights": [
+        "Maintained high performance and attention to detail in a fast-paced environment.",
+        "Followed strict hygiene protocols and equipment handling procedures."
+      ]
+    },
+    {
+      "company": "China Telecom",
+      "position": "Internet Maintaining Manager",
+      "location": "Shenzhen, China",
+      "startDate": "2018-11",
+      "endDate": "2022-12",
+      "tags": [
+        "developer",
+        "network",
+        "management",
+        "stakeholder"
+      ],
+      "highlights": [
+        "Managed end-to-end network reliability for 10,000+ users, ensuring 99.9% system uptime.",
+        "Acted as a key liaison for base station lease negotiations and stakeholder management.",
+        "Conducted on-site signal testing and quality analysis to resolve network dead zones."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "VR Architectural Interaction Prototype",
+      "description": "Interactive Design Tool for Architects",
+      "github": "https://github.com/BeriaL-CN/VR_Construction_Design_App_DECO7230",
+      "role": "Product Lead (Researcher)",
+      "date": "Aug 2024 - Nov 2024",
+      "institution": "UQ",
+      "location": "Brisbane, Australia",
+      "tags": [
+        "dev",
+        "VR",
+        "product",
+        "developer",
+        "technical product coordinator",
+        "it support specialist",
+        "技术产品经理",
+        "技术背景产品经理"
+      ],
+      "highlights": [
+        "Designed a natural interaction scheme for architects using Unity and Meta VR SDK.",
+        "Implemented modular scene libraries resulting in a 70% increase in design efficiency during testing.",
+        "Implemented lighting simulation adjustment, building placement, and terrain orientation features.",
+        "Iterated through two versions based on user feedback."
+      ]
+    },
+    {
+      "name": "Food Map: Containerized Full-Stack Platform",
+      "description": "Interactive Food Map and Nutrition Comparison Platform",
+      "github": "https://github.com/BeriaL-CN/100_healthiest_food_web_INFS3208",
+      "role": "Developer & Designer",
+      "date": "Sep 2024 - Oct 2024",
+      "institution": "UQ",
+      "location": "Brisbane, Australia",
+      "tags": [
+        "dev",
+        "devops",
+        "full-stack",
+        "developer",
+        "technical product coordinator",
+        "it support specialist",
+        "技术产品经理",
+        "技术背景产品经理"
+      ],
+      "highlights": [
+        "Architected a platform using React (Frontend) and Django (Backend) with Docker containerization.",
+        "Deployed via Docker Swarm on GCP with automated CI/CD pipelines."
+      ]
+    },
+    {
+      "name": "Facebook Potential Connection Predictor",
+      "description": "GNN Research Project",
+      "role": "Technical Lead (GNN Research)",
+      "date": "May 2024 - June 2024",
+      "institution": "UQ",
+      "location": "Brisbane, Australia",
+      "tags": [
+        "data",
+        "AI",
+        "technical",
+        "developer",
+        "technical product coordinator",
+        "it support specialist",
+        "技术产品经理",
+        "技术背景产品经理"
+      ],
+      "highlights": [
+        "Processed 6M+ nodes and 120M+ edges using PyTorch to predict social connections.",
+        "Achieved an AUC of 0.92 for recommendations."
+      ]
+    },
+    {
+      "name": "VR Companion Research Project",
+      "description": "VR Psychology Study",
+      "role": "Graduate Researcher & Developer",
+      "date": "Feb 2023 - Dec 2024",
+      "institution": "The University of Queensland",
+      "location": "Brisbane, Australia",
+      "tags": [
+        "research",
+        "VR",
+        "psychology",
+        "dev",
+        "technical product coordinator",
+        "it support specialist",
+        "技术产品经理",
+        "技术背景产品经理"
+      ],
+      "highlights": [
+        "Developed a VR application using Unity to place a virtual companion in the environment.",
+        "Recruited volunteers to collect experimental data studying psychological effects."
+      ]
+    },
+    {
+      "name": "Social Graph Edge Prediction",
+      "description": "Graph Neural Network Research",
+      "role": "Graduate Researcher & Developer",
+      "date": "Feb 2023 - Dec 2024",
+      "institution": "The University of Queensland",
+      "location": "Brisbane, Australia",
+      "tags": [
+        "data",
+        "AI",
+        "ML",
+        "technical product coordinator",
+        "it support specialist",
+        "技术产品经理",
+        "技术背景产品经理"
+      ],
+      "highlights": [
+        "Predicted potential connections in a processed Facebook open-source graph database.",
+        "Used algorithms including common neighbors, shortest paths, and PyTorch-based machine learning models."
+      ]
+    },
+    {
+      "name": "UQ Hackathon - The Centenarian",
+      "description": "People's Choice Award-winning Unity Space Shooter with Arduino Cockpit Controls",
+      "github": "https://github.com/ArkansasLover/the-centenarian",
+      "role": "Bullet Mechanics & UI Contributor",
+      "date": "Aug 2023",
+      "institution": "UQ Hackathon",
+      "location": "Brisbane, Australia",
+      "tags": [
+        "game",
+        "unity",
+        "hackathon",
+        "technical product coordinator",
+        "it support specialist",
+        "技术产品经理",
+        "技术背景产品经理"
+      ],
+      "highlights": [
+        "Built a Unity space shooter in 48 hours for the UQ Hackathon, winning the People's Choice Award.",
+        "Implemented the bullet shooting mechanics, including projectile spawning, movement behavior, and gameplay feedback.",
+        "Contributed UI elements that supported the game's playable presentation and controller-driven experience."
+      ]
+    }
+  ],
+  "skills": {
+    "technical": [
+      "React",
+      "Django",
+      "Python",
+      "Node.js",
+      "TypeScript",
+      "SQL",
+      "Docker",
+      "GCP",
+      "PyTorch",
+      "Unity",
+      "C#"
+    ],
+    "hardware": [
+      "Hardware Assembly",
+      "PC Building",
+      "Diagnostics",
+      "Electronic Repair",
+      "Field Signal Testing"
+    ],
+    "soft_skills": [
+      "Stakeholder Management",
+      "UX Research",
+      "MVP Definition",
+      "Trilingual Communication",
+      "Product Vision",
+      "Data-Driven Decision Making",
+      "User-Centered Design"
+    ],
+    "ai_tools": [
+      "Copilot",
+      "Cline"
+    ],
+    "product_skills": [
+      "Game Mechanic Analysis",
+      "User Story Mapping",
+      "Wireframing",
+      "Prototyping",
+      "A/B Testing"
+    ],
+    "tools": [
+      "Figma",
+      "Git",
+      "Discord",
+      "Premiere",
+      "Oculus SDK"
+    ]
+  },
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Professional (PTE 58)"
+    },
+    {
+      "language": "Mandarin",
+      "fluency": "Native"
+    },
+    {
+      "language": "Cantonese",
+      "fluency": "Native"
+    }
+  ],
+  "areaOfExpertise": {
+    "developer": [
+      "Full-Stack Dev (React/Node)",
+      "Docker & Containerization",
+      "RESTful API Design",
+      "Cloud Deployment (GCP/AWS)",
+      "Git Version Control",
+      "System Maintenance",
+      "Python & Django",
+      "HTML5 & CSS3",
+      "SQL & NoSQL Database",
+      "CI/CD Pipelines",
+      "AI Tooling (Cursor/Claude)",
+      "Technical Documentation"
+    ]
+  },
+  "awards": [
+    {
+      "title": "People's Choice Award",
+      "date": "2023-08",
+      "awarder": "UQ Hackathon",
+      "summary": "Developed a 2D space shooter game in 48 hours using Unity. Implemented bullet shooting mechanics and contributed to UI design. Validated hardware interaction through an Arduino-controlled gamepad with <80ms latency."
+    }
+  ],
+  "leadership": [
+    {
+      "title": "Council Member",
+      "date": "2023-09 - 2024-06",
+      "organization": "UQ Photography Society",
+      "summary": "Organized 5+ large-scale workshops and exhibitions for 50+ students, managing community engagement and digital assets."
+    }
+  ]
+}

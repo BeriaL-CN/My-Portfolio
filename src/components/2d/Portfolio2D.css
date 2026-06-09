@@ -188,6 +188,176 @@
   border-color: #90c8e8;
 }
 
+/* Desktop previews float near the cursor; mobile keeps the same media inside the card. */
+.project-card.has-preview {
+  overflow: visible;
+}
+
+.project-preview {
+  display: none;
+}
+
+.project-preview-frame {
+  aspect-ratio: 16 / 9;
+  border: 2px solid #d0b890;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1f2630;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.project-floating-preview {
+  position: fixed;
+  width: min(440px, calc(100vw - 2rem));
+  z-index: 1000;
+  /* The preview is interactive because users can open full images and demo videos from it. */
+  pointer-events: auto;
+  padding: 0.65rem;
+  border: 2px solid #90c8e8;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fffdf5 0%, #f8f0e0 100%);
+  filter: drop-shadow(0 14px 28px rgba(32, 24, 16, 0.28));
+}
+
+.project-floating-preview .project-preview-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.floating-preview-actions {
+  /* The fixed panel gets a compact action grid beneath the primary preview. */
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 0.65rem;
+}
+
+.floating-preview-actions .project-preview-thumb {
+  color: #5c4f42;
+  text-decoration: none;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.floating-preview-actions .project-preview-thumb span:not(.project-preview-play) {
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.project-preview-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-preview-image-link {
+  /* Keep image previews looking like media, not default browser links. */
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.project-preview-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #1f2630;
+}
+
+.project-preview-youtube {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #1f2630;
+}
+
+.project-preview-youtube-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.55rem 0.8rem;
+  border-radius: 6px;
+  background: #e8c020;
+  color: #202020;
+  border: 3px solid #807000;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+}
+
+.project-preview-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.project-preview-thumb {
+  margin: 0;
+  min-width: 0;
+  color: #5c4f42;
+  text-decoration: none;
+}
+
+.project-preview-thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 2px solid #e0d0b0;
+  border-radius: 6px;
+  background: #1f2630;
+}
+
+.project-preview-thumb figcaption,
+.project-preview-thumb span:not(.project-preview-play) {
+  display: block;
+  margin-top: 0.35rem;
+  color: #5c4f42;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.project-preview-video-link {
+  min-height: 76px;
+  padding: 0.7rem;
+  border: 2px solid #e0d0b0;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #2c3440 0%, #1f2630 100%);
+  color: #fff8e8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: uppercase;
+  transition: transform 0.16s ease, border-color 0.16s ease;
+}
+
+.project-preview-video-link:hover {
+  transform: translateY(-2px);
+  border-color: #90c8e8;
+}
+
+.project-preview-play {
+  width: fit-content;
+  padding: 0.25rem 0.45rem;
+  border-radius: 4px;
+  background: #e8c020;
+  color: #202020;
+  border: 2px solid #807000;
+}
+
 /* 卡片标题 */
 .card-title {
   font-size: 1.4rem;
@@ -199,9 +369,24 @@
 /* 卡片描述文字 */
 .card-description {
   font-size: 1.1rem;
-  color: #706050;
+  /* Slightly darker and heavier than the original thin text for better scanning. */
+  color: #4f4337;
   line-height: 1.8;
   margin: 0 0 1.5rem 0;
+  font-weight: 500;
+}
+
+/* Resume highlights are rendered as bullets without changing the card layout. */
+.card-highlights {
+  padding-left: 1.3rem;
+}
+
+.card-highlights li {
+  margin-bottom: 0.65rem;
+}
+
+.card-highlights li:last-child {
+  margin-bottom: 0;
 }
 
 /* 标签容器 */
@@ -402,7 +587,8 @@
 /* 关于描述 */
 .about-content p {
   font-size: 1.2rem;
-  color: #706050;
+  /* Match project copy contrast so long profile text is easier to read. */
+  color: #4f4337;
   line-height: 1.8;
   font-weight: 500;
 }
@@ -559,11 +745,13 @@
 
 /* 联系方式页脚 */
 .contact-footer {
-  color: #706050;
+  /* Keep the existing style, but improve readability on low-contrast displays. */
+  color: #4f4337;
   font-size: 0.95rem;
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.8;
+  font-weight: 500;
 }
 
 
@@ -632,6 +820,20 @@
 
   .project-card {
     padding: 1.25rem;
+  }
+
+  /* Touch devices do not have reliable hover, so previews are visible by default. */
+  .project-preview {
+    display: block;
+    margin-bottom: 1.15rem;
+  }
+
+  .project-floating-preview {
+    display: none;
+  }
+
+  .project-preview-thumbs {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .card-title {
@@ -777,60 +979,71 @@
 /* ========================================
    响应式字体大小优化
    ======================================== */
-/* 标题字号 */
-.section-header h2 {
-  font-size: 1.4rem;
-}
+@media (max-width: 480px) {
+  /* Keep compact mobile typography scoped to phones so it does not shrink desktop text. */
+  /* 标题字号 */
+  .section-header h2 {
+    font-size: 1.4rem;
+  }
 
-.section-header p {
-  font-size: 0.85rem;
-}
+  .section-header p {
+    font-size: 0.85rem;
+  }
 
-.hero-title {
-  font-size: 1.8rem;
-}
+  .hero-title {
+    font-size: 1.8rem;
+  }
 
-.hero-subtitle {
-  font-size: 1rem;
-}
+  .hero-subtitle {
+    font-size: 1rem;
+  }
 
-.card-title {
-  font-size: 1.1rem;
-}
+  .card-title {
+    font-size: 1.1rem;
+  }
 
-.card-description {
-  font-size: 0.9rem;
-}
+  .card-description {
+    font-size: 0.9rem;
+  }
 
-/* 标签字号最小化 */
-.tag {
-  font-size: 0.5rem;
-  padding: 0.25rem 0.45rem;
-}
+  /* 标签字号最小化 */
+  .tag {
+    font-size: 0.5rem;
+    padding: 0.25rem 0.45rem;
+  }
 
-.card-link {
-  font-size: 0.6rem;
-  padding: 0.5rem 1rem;
-}
+  .card-link {
+    font-size: 0.6rem;
+    padding: 0.5rem 1rem;
+  }
 
-/* 联系方式标题 */
-.contact-section .section-header h2 {
-  font-size: 1.4rem;
-}
+  .project-preview-thumbs {
+    gap: 0.5rem;
+  }
 
-.contact-section .section-header p {
-  font-size: 0.8rem;
-}
+  .project-preview-thumb figcaption {
+    font-size: 0.56rem;
+  }
 
-/* 社交链接 */
-.social-link {
-  font-size: 0.75rem;
-  padding: 0.85rem 1.2rem;
-}
+  /* 联系方式标题 */
+  .contact-section .section-header h2 {
+    font-size: 1.4rem;
+  }
 
-.social-link svg {
-  width: 20px;
-  height: 20px;
+  .contact-section .section-header p {
+    font-size: 0.8rem;
+  }
+
+  /* 社交链接 */
+  .social-link {
+    font-size: 0.75rem;
+    padding: 0.85rem 1.2rem;
+  }
+
+  .social-link svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 
@@ -852,5 +1065,35 @@
   .about-section,
   .contact-section {
     padding: 3rem 2rem;
+  }
+}
+
+/* --- 桌面端阅读优化 (1025px+) --- */
+@media (min-width: 1025px) {
+  /* Desktop gets a little more breathing room while preserving the one-column card design. */
+  .projects-grid {
+    max-width: 900px;
+  }
+
+  .project-card {
+    padding: 2rem;
+  }
+
+  .card-title {
+    font-size: 1.55rem;
+  }
+
+  .card-description {
+    font-size: 1.12rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .card-link {
+    font-size: 0.78rem;
+    padding: 0.7rem 1.3rem;
   }
 }

@@ -6,8 +6,10 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei'; 
 import { useKeyboardControls } from './useKeyboardControls'; // 导入自定义的键盘控制钩子
 import * as THREE from 'three';
+import { assetPath } from '../../utils/assetPath';
 
-const PLAYER_MODEL_PATH = 'models/player_model.glb'; 
+// Player model also needs the Vite base path when deployed under /My-Portfolio/.
+const PLAYER_MODEL_PATH = assetPath('models/player_model.glb'); 
 
 export const Player = forwardRef(function Player({ collidableObjects = [], joystickInput = null, props }, ref) {
     const groupRef = useRef(); 

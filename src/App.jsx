@@ -7,12 +7,15 @@ import { VirtualJoystick } from './components/3d/VirtualJoystick';
 import './App.css'; 
 import ProjectDetailsPanel from './components/3d/ProjectDetailsPanel';
 import Portfolio2D from './components/2d/Portfolio2D';
+import { fallbackPortfolioViewData } from './data/portfolioData';
 
 function App() {
   const [viewMode, setViewMode] = useState('2D');
   const [selectedProject, setSelectedProject] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [joystickInput, setJoystickInput] = useState({ x: 0, y: 0 });
+  // CI updates the bundled JSON before build, so runtime stays static and reliable.
+  const portfolioViewData = fallbackPortfolioViewData;
   
   // 检测是否为移动端设备
   useEffect(() => {
@@ -32,6 +35,13 @@ function App() {
   // 处理摇杆移动
   const handleJoystickMove = useCallback((input) => {
     setJoystickInput(input);
+  }, []);
+
+  // Both the UI toggle and the 3D boundary exit use this path so stale overlays/input are cleared.
+  const handleExitTo2D = useCallback(() => {
+    setSelectedProject(null);
+    setJoystickInput({ x: 0, y: 0 });
+    setViewMode('2D');
   }, []);
 
   const uiStyle = { 
@@ -62,7 +72,12 @@ function App() {
       <button 
         style={uiStyle}
         onClick={(e) => {
-          setViewMode(viewMode === '3D' ? '2D' : '3D');
+          // Leaving 3D through the button should behave the same as walking out of the scene.
+          if (viewMode === '3D') {
+            handleExitTo2D();
+          } else {
+            setViewMode('3D');
+          }
           // 防止按钮保持选中状态
           e.target.blur();
         }}
@@ -90,11 +105,12 @@ function App() {
             style={{ background: '#000000ff' }}
           >
             <ThreeDScene 
+              portfolioData={portfolioViewData.portfolioData}
               onProjectSelect={setSelectedProject}
               selectedProject={selectedProject}
               onProjectClose={() => setSelectedProject(null)}
+              onExitTo2D={handleExitTo2D}
               viewMode={viewMode}
-              onJoystickMove={handleJoystickMove}
               joystickInput={joystickInput}
               isMobile={isMobile}
             />
@@ -106,7 +122,11 @@ function App() {
         </>
       ) : (
         // 2D Portfolio 视图
-        <Portfolio2D />
+        <Portfolio2D
+          portfolioData={portfolioViewData.portfolioData}
+          portfolioMeta={portfolioViewData.portfolioMeta}
+          contactData={portfolioViewData.contactData}
+        />
       )} 
       
       {/* 项目详情面板 */}

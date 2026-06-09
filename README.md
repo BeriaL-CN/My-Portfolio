@@ -7,6 +7,7 @@
 ## 🎨 Project Overview (EN)
 
 A creative personal portfolio website built with **React** and **Vite**, featuring an immersive **3D environment** themed around a Pokemon Center, with interactive player navigation and project markers.
+Portfolio content is adapted from a JSON Resume data file, so the 2D and 3D views share the same project copy, contact links, tags, and media previews.
 
 ### Live Demo
 
@@ -19,22 +20,32 @@ The site is deployed on GitHub Pages: https://berial-cn.github.io/My-Portfolio/
 - Third-person player navigation (WASD/Arrow keys)
 - Interactive project markers (Pokeballs)
 - Space key interaction for opening/closing project details
+- Automatic return to 2D when the player leaves the rendered Pokemon Center model footprint
 
 ✅ **2D Portfolio Website Complete** - A modern, responsive portfolio website with:
 - Full-screen homepage with floating scroll indicator
-- Clean project card layout with hover effects
+- Clean project card layout with fixed floating media previews on desktop hover
+- Mobile-friendly inline previews with tap-to-open full-size images
 - Smooth navigation between sections
 - Modern gradient design and animations
+
+✅ **Project Media Complete** - Featured projects now include:
+- VR Construction: YouTube demo thumbnail and video link
+- Food Map: four screenshots with full-size image links
+- The Centenarian: gameplay/controller screenshot plus three demo video links
 
 ### Core Features
 
 - 🎨 **Dual View Modes**: Seamless switching between immersive 3D view and modern 2D portfolio view
+- 🧾 **Resume-Driven Content**: Shared project, profile, and contact data sourced from JSON Resume-style data
 - 🌐 **3D Environment**: Pokemon Center themed scene rendered with Three.js (GLB models via `useGLTF`)
 - 🎮 **Third-Person Player**: Controllable character with smooth TPS camera follow, directional movement, and animation blending
 - ⌨️ **Input Controls**: Supports `W/A/S/D` and Arrow keys concurrently; Space key for project interaction
 - 🦾 **Animations**: Managed with `useAnimations` (Three.js AnimationMixer) and cross-fade transitions
 - 🛡️ **Collision Detection**: Multi-ray sampling collision checks prevent walking through walls
+- 🚪 **3D Exit Interaction**: Leaving the Pokemon Center model bounds closes overlays and returns to the 2D portfolio
 - 🎯 **Interactive Markers**: Pokeball-shaped project markers that respond to player proximity
+- 🖼️ **Project Previews**: Desktop floating preview panel, mobile inline screenshots, full-size image links, and video demo links
 - ⚡ **High Performance**: Vite build tool with instant cold start and fast HMR
 - 📱 **Mobile-Optimized**: Responsive design for mobile devices with optimized fonts, layouts, and touch interactions
 - 🎨 **2D Portfolio**: Modern single-page portfolio with full-screen homepage, project cards, and smooth navigation
@@ -58,31 +69,37 @@ my-portfolio/
 ├── src/
 │   ├── App.jsx                    # Main app component (view switching, state management)
 │   ├── App.css                    # Application styles
-│   ├── ProjectDetailsPanel.jsx    # Project details modal panel
 │   ├── main.jsx                  # App entry point
 │   ├── index.css                 # Global styles
+│   ├── utils/
+│   │   └── assetPath.js          # Public asset path helper for GitHub Pages base URLs
 │   ├── components/
 │   │   ├── 2d/                   # 2D portfolio components
 │   │   │   ├── PortfolioHeader.jsx   # Navigation header
-│   │   │   ├── ProjectCard.jsx       # Project card component
+│   │   │   ├── ProjectCard.jsx       # Project card and floating preview component
 │   │   │   ├── HomeSection.jsx       # Full-screen homepage
 │   │   │   ├── ContactSection.jsx  # Contact section component
-│   │   │   └── Portfolio2D.jsx       # Main 2D portfolio layout
-│   │   │   └── Portfolio2D.css       # 2D portfolio styles
+│   │   │   ├── Portfolio2D.jsx       # Main 2D portfolio layout
+│   │   │   └── Portfolio2D.css       # 2D portfolio and preview styles
 │   │   └── 3d/                  # 3D scene components
 │   │       ├── ThreeDScene.jsx   # 3D scene assembly
 │   │       ├── Player.jsx        # Player controller
 │   │       ├── ProjectMarker.jsx # Interactive project markers
 │   │       ├── PokemonCenter.jsx  # Environment model loader
+│   │       ├── ProjectDetailsPanel.jsx # 3D project details modal
 │   │       └── useKeyboardControls.jsx # Keyboard input hook
 │   ├── data/
-│   │   └── portfolioData.js      # Project data configuration
+│   │   ├── portfolioData.js      # Resume adapter, featured projects, and media previews
+│   │   └── resume_data_jiepeng_huang.json # JSON Resume source data
 │   └── assets/                   # Static resources
 ├── public/
 │   ├── models/                   # 3D GLB models
 │   │   ├── player_model.glb
 │   │   ├── pokeballs.glb
 │   │   └── pokemon_center.glb
+│   ├── previews/                 # Project screenshots used by 2D/3D previews
+│   │   ├── centenarian/
+│   │   └── fruit-map/
 │   └── vite.svg
 ├── vite.config.js                # Vite configuration
 ├── eslint.config.js              # ESLint configuration
@@ -133,6 +150,7 @@ npm run lint
 
 #### 1. **View Switching**
 - Click the fixed button at the bottom-left corner to toggle between 3D and 2D views
+- In 3D mode, walking outside the rendered Pokemon Center model footprint also returns to the 2D view
 
 #### 2. **3D Navigation**
 - **W / Arrow Up**: Move forward
@@ -145,18 +163,16 @@ npm run lint
 - Press **Space** to open project details
 - Press **Space** again to close the panel
 
+#### 4. **2D Project Previews**
+- On desktop, hover a project card to open a fixed floating preview panel near the cursor
+- Move into the floating panel to open full-size images or demo videos
+- On mobile, previews are shown inline; tap screenshots to view the original image
+
 ### Deployment (GitHub Pages)
 
-```bash
-npm install --save-dev gh-pages
-# Add to package.json:
-"homepage": "https://berial-cn.github.io/My-Portfolio",
-"scripts": {
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
-}
-npm run deploy
-```
+GitHub Pages is deployed by `.github/workflows/deploy-pages.yml`.
+
+During CI, the workflow downloads `resume_data_jiepeng_huang.json` from the public `BeriaL-CN/digital_resume` repository before running `npm run build`. The site still uses bundled static JSON at runtime, so visitors do not depend on GitHub raw availability after deployment.
 
 ### License
 
@@ -174,6 +190,7 @@ MIT License
 ## 📋 项目概述
 
 一个创意的个人作品展示网站，基于 **React** 和 **Vite** 构建，包含一个以宝可梦中心为主题的沉浸式 **3D 环境**，玩家可以在其中自由探索并与作品标记互动。
+作品集内容由 JSON Resume 风格的数据文件统一适配，2D 和 3D 视图共用同一份项目文案、联系方式、标签和媒体预览。
 
 ### 演示地址
 
@@ -186,22 +203,32 @@ MIT License
 - 第三人称玩家控制（WASD/方向键）
 - 精灵球形态的交互式项目标记
 - 空格键打开/关闭项目详情面板
+- 人物离开宝可梦中心模型渲染范围后自动返回 2D 页面
 
 ✅ **2D 作品集网站已完成** - 现代响应式作品集网站，包括：
 - 带浮动滚动指示器的全屏首页
-- 带悬停效果的简洁项目卡片布局
+- 桌面端项目卡片悬停后显示固定浮动预览窗口
+- 移动端内嵌项目预览，并支持点击截图查看原图
 - 各部分间的平滑导航
 - 现代渐变设计和动画效果
+
+✅ **项目媒体预览已完成** - 当前 featured projects 包括：
+- VR Construction：YouTube 演示缩略图和视频链接
+- Food Map：4 张项目截图，并支持查看原图
+- The Centenarian：游戏/控制器截图和 3 个演示视频链接
 
 ### 核心特性
 
 - 🎨 **双视图模式**：沉浸式 3D 视图与现代 2D 作品集视图无缝切换
+- 🧾 **履历数据驱动**：项目、个人简介和联系方式来自统一的 JSON Resume 数据适配层
 - 🌐 **3D 环境**：宝可梦中心主题场景，基于 Three.js 渲染（通过 `useGLTF` 加载 GLB 模型）
 - 🎮 **第三人称玩家**：可控制角色，平滑 TPS 相机跟随、方向移动与动画混合
 - ⌨️ **输入支持**：同时支持 `W/A/S/D`、方向键；空格键与项目标记交互
 - 🦾 **动画管理**：使用 `useAnimations`（AnimationMixer）实现动画过渡和 cross-fade
 - 🛡️ **碰撞检测**：多射线采样检测，防止穿墙
+- 🚪 **3D 返回交互**：离开宝可梦中心模型边界时关闭浮层并返回 2D 页面
 - 🎯 **交互式标记**：精灵球形态的项目标记，响应玩家接近
+- 🖼️ **项目预览**：桌面端浮动预览、移动端内嵌截图、原图查看和视频演示链接
 - ⚡ **高性能**：Vite 构建工具，极速冷启动和热更新
 - 📱 **移动优化**：响应式设计，针对移动设备优化字体大小、布局和触控交互
 - 🎨 **2D 作品集**：现代单页作品集，包含全屏首页、项目卡片、联系方式和流畅导航
@@ -229,31 +256,37 @@ my-portfolio/
 ├── src/
 │   ├── App.jsx                    # 主应用组件（视图切换、状态管理）
 │   ├── App.css                    # 应用样式
-│   ├── ProjectDetailsPanel.jsx    # 项目详情弹窗面板
 │   ├── main.jsx                  # 应用入口
 │   ├── index.css                 # 全局样式
+│   ├── utils/
+│   │   └── assetPath.js          # GitHub Pages base URL 下的 public 资源路径助手
 │   ├── components/
 │   │   ├── 2d/                   # 2D 作品集组件
 │   │   │   ├── PortfolioHeader.jsx   # 导航头部
-│   │   │   ├── ProjectCard.jsx       # 项目卡片组件
+│   │   │   ├── ProjectCard.jsx       # 项目卡片与浮动预览组件
 │   │   │   ├── HomeSection.jsx       # 全屏首页
 │   │   │   ├── ContactSection.jsx    # 联系方式板块
-│   │   │   └── Portfolio2D.jsx       # 主 2D 作品集布局
-│   │   │   └── Portfolio2D.css       # 2D 作品集样式
+│   │   │   ├── Portfolio2D.jsx       # 主 2D 作品集布局
+│   │   │   └── Portfolio2D.css       # 2D 作品集和预览样式
 │   │   └── 3d/                  # 3D 场景组件
 │   │       ├── ThreeDScene.jsx   # 3D 场景组件
 │   │       ├── Player.jsx        # 玩家控制器
 │   │       ├── ProjectMarker.jsx # 交互式项目标记
 │   │       ├── PokemonCenter.jsx # 环境模型加载器
+│   │       ├── ProjectDetailsPanel.jsx # 3D 项目详情面板
 │   │       └── useKeyboardControls.jsx # 键盘输入 Hook
 │   ├── data/
-│   │   └── portfolioData.js      # 项目数据配置
+│   │   ├── portfolioData.js      # 履历数据适配、featured projects 和媒体预览
+│   │   └── resume_data_jiepeng_huang.json # JSON Resume 源数据
 │   └── assets/                   # 静态资源
 ├── public/
 │   ├── models/                   # 3D GLB 模型文件
 │   │   ├── player_model.glb
 │   │   ├── pokeballs.glb
 │   │   └── pokemon_center.glb
+│   ├── previews/                 # 2D/3D 项目预览截图
+│   │   ├── centenarian/
+│   │   └── fruit-map/
 │   └── vite.svg
 ├── vite.config.js               # Vite 配置文件
 ├── eslint.config.js            # ESLint 配置
@@ -297,6 +330,12 @@ npm run build
 npm run preview
 ```
 
+### GitHub Pages 部署
+
+项目通过 `.github/workflows/deploy-pages.yml` 自动部署到 GitHub Pages。
+
+CI 会在执行 `npm run build` 前，从公开仓库 `BeriaL-CN/digital_resume` 下载 `resume_data_jiepeng_huang.json` 到本项目的数据目录。网站运行时仍使用构建产物中的静态 JSON，因此部署后访客访问页面不依赖 GitHub raw 文件的实时可用性。
+
 ### 代码检查
 
 ```bash
@@ -309,6 +348,7 @@ npm run lint
 
 ### 1. 视图切换
 - 点击左下角固定按钮在 3D 和 2D 视图间切换
+- 在 3D 视图中，人物离开宝可梦中心模型渲染范围后也会返回 2D 页面
 
 ### 2. 3D 导航
 - **W / ↑**：向前移动
@@ -321,6 +361,11 @@ npm run lint
 - 按 **空格键** 打开项目详情
 - 再次按 **空格键** 关闭面板
 
+### 4. 2D 项目预览
+- 桌面端悬停项目卡片时，会在鼠标附近显示固定浮动预览窗口
+- 可以移动到浮动窗口中点击查看原图或打开演示视频
+- 移动端会直接显示内嵌预览，点击截图可查看原图
+
 ---
 
 ## 📧 联系方式
@@ -330,4 +375,10 @@ npm run lint
 
 ---
 
-**最后更新**: 2026 年 4 月
+**最后更新**: 2026 年 6 月
+
+
+## 精灵球模型来源
+https://sketchfab.com/3d-models/pokeballs-84120cf99f074b89bd3b7619a426d708
+## 人物模型来源
+https://skfb.ly/pzYpT

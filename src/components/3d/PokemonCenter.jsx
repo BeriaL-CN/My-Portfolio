@@ -2,11 +2,13 @@
 
 import { useGLTF } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { assetPath } from '../../utils/assetPath';
 
-// 模型文件路径 (注意：从 public 文件夹直接以 / 开头引用)
-const MODEL_PATH = 'models/pokemon_center.glb';
+// Build the public model URL with Vite's base path so GitHub Pages does not return index.html.
+const MODEL_PATH = assetPath('models/pokemon_center.glb');
 
-export function PokemonCenter({ onLoaded, ...props }) {
+export function PokemonCenter({ onLoaded, onBoundsLoaded, ...props }) {
     // useGLTF 是 Drei 提供的钩子，用于异步加载 GLTF/GLB 模型
     const { scene } = useGLTF(MODEL_PATH);
     const sceneRef = useRef(null);
@@ -27,7 +29,16 @@ export function PokemonCenter({ onLoaded, ...props }) {
         if (onLoaded) {
             onLoaded(selectedMeshes);
         }
-    }, [scene, onLoaded]); // 依赖项是加载的场景对象
+
+        // Use the rendered model bounds as the playable footprint for returning to 2D.
+        if (onBoundsLoaded && sceneRef.current) {
+            sceneRef.current.updateMatrixWorld(true);
+            const bounds = new THREE.Box3().setFromObject(sceneRef.current);
+            if (!bounds.isEmpty()) {
+                onBoundsLoaded(bounds.clone());
+            }
+        }
+    }, [scene, onLoaded, onBoundsLoaded]); // 依赖项是加载的场景对象
 
     return (
         // primitive 允许我们直接渲染一个 Three.js 原生对象 (scene)

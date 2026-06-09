@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PortfolioHeader = ({ activeSection, onNavigate }) => {
+const PortfolioHeader = ({ portfolioMeta, activeSection, onNavigate }) => {
   const scrollToSection = (sectionId) => {
     const section = document.querySelector(`.${sectionId}-section`);
     if (section) {
@@ -23,7 +23,7 @@ const PortfolioHeader = ({ activeSection, onNavigate }) => {
   return (
     <header className="portfolio-header">
       <div className="header-container">
-        <h1 className="header-title">BeriaL's Portfolio</h1>
+        <h1 className="header-title">{portfolioMeta.title}</h1>
         <nav className="header-nav">
           <button 
             className={`nav-btn ${activeSection === 'home' ? 'active' : ''}`}

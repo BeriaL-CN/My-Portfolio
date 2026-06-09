@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HomeSection = () => {
+const HomeSection = ({ portfolioMeta }) => {
   const scrollToProjects = () => {
     const projectsSection = document.querySelector('.projects-section');
     if (projectsSection) {
@@ -16,8 +16,8 @@ const HomeSection = () => {
       </div>
       
       <div className="hero-content">
-        <h1 className="hero-title">BeriaL's Portfolio</h1>
-        <p className="hero-subtitle">Creative Developer & Designer</p>
+        <h1 className="hero-title">{portfolioMeta.title}</h1>
+        <p className="hero-subtitle">{portfolioMeta.label}</p>
         
         <div className="scroll-indicator" onClick={scrollToProjects}>
           <span className="scroll-text">Scroll Down</span>

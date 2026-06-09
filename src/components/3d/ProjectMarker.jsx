@@ -5,8 +5,10 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { useKeyboardControls } from './useKeyboardControls';
+import { assetPath } from '../../utils/assetPath';
 
-const BALL_MODEL_PATH = 'models/pokeballs.glb'; 
+// Pokeball markers are public assets, so use the same base-aware URL helper.
+const BALL_MODEL_PATH = assetPath('models/pokeballs.glb'); 
 
 export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedProject, onRegister, player, viewMode, isMobile, ...props }) {
   const meshRef = useRef(); // 引用到标记的 mesh 对象
@@ -49,7 +51,7 @@ export function ProjectMarker({ data, onProjectSelect, onProjectClose, selectedP
 
       return () => clearTimeout(timeoutId);
     }
-  }, [viewMode]); // 只依赖视图模式
+  }, [viewMode, data.title]); // Reload when returning to 3D or when marker data changes.
 
   // 5. 注册碰撞（继承你之前的逻辑）
   useEffect(() => {

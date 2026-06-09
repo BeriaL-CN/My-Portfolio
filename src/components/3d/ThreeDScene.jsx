@@ -1,10 +1,8 @@
 // src/ThreeDScene.jsx
 
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-// 导入项目数据
-import { portfolioData } from '../../data/portfolioData';
 import { PokemonCenter } from './PokemonCenter';
 import { ProjectMarker } from './ProjectMarker';
 import { Player } from './Player';
@@ -72,12 +70,15 @@ import * as THREE from 'three';
 // };
 
 
-const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose, onJoystickMove, joystickInput, isMobile }) => {
+const ThreeDScene = ({ portfolioData, onProjectSelect, selectedProject, onProjectClose, onExitTo2D, joystickInput, isMobile }) => {
   // 用于缓存可碰撞网格的状态（Hooks 必须在组件内部声明）
   const [collidableMeshes, setCollidableMeshes] = useState([]);
+  const [sceneBounds, setSceneBounds] = useState(null);
 
   // 玩家位置引用（避免每帧查找）
   const playerPositionRef = useRef(new THREE.Vector3(0, 0, 0));
+  const hasEnteredBoundsRef = useRef(false);
+  const exitTriggeredRef = useRef(false);
 
   // 玩家 ref，用于获取玩家位置
   const playerRef = useRef();
@@ -86,6 +87,26 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose, onJoyst
   useFrame(() => {
     if (playerRef.current) {
       playerRef.current.getWorldPosition(playerPositionRef.current);
+
+      if (sceneBounds && onExitTo2D && !exitTriggeredRef.current) {
+        // Treat the GLB footprint as the 3D world's boundary and ignore vertical height.
+        const padding = 0.2;
+        const position = playerPositionRef.current;
+        const isInsideSceneFootprint = (
+          position.x >= sceneBounds.min.x - padding &&
+          position.x <= sceneBounds.max.x + padding &&
+          position.z >= sceneBounds.min.z - padding &&
+          position.z <= sceneBounds.max.z + padding
+        );
+
+        if (isInsideSceneFootprint) {
+          hasEnteredBoundsRef.current = true;
+        } else if (hasEnteredBoundsRef.current) {
+          // Wait until the player has been inside once so model-loading timing cannot auto-exit.
+          exitTriggeredRef.current = true;
+          onExitTo2D();
+        }
+      }
     }
   });
 
@@ -111,6 +132,11 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose, onJoyst
     console.log(`[Collision] Loaded ${filteredMeshes.length} model meshes.`);
   }, [setCollidableMeshes]);
 
+  const handleBoundsLoaded = useCallback((bounds) => {
+    // Stored separately from collision meshes because it is an exit trigger, not a wall.
+    setSceneBounds(bounds);
+  }, []);
+
   return (
     <>
       <ambientLight intensity={0.5} />
@@ -130,6 +156,7 @@ const ThreeDScene = ({ onProjectSelect, selectedProject, onProjectClose, onJoyst
       {/* 1. 渲染宝可梦中心背景模型，并在加载完成时获取碰撞网格 */}
       <PokemonCenter
         onLoaded={handleModelLoaded} // 传递处理模型网格的函数
+        onBoundsLoaded={handleBoundsLoaded}
       />
 
       {/* 2. 渲染玩家模型 */}
