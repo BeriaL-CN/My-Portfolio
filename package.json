@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "sync:resume": "node scripts/syncResumeData.mjs",
+    "predeploy": "npm run sync:resume && npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

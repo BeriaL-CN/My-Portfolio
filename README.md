@@ -170,9 +170,13 @@ npm run lint
 
 ### Deployment (GitHub Pages)
 
-GitHub Pages is deployed by `.github/workflows/deploy-pages.yml`.
+The site uses the repository's existing `gh-pages` branch deployment:
 
-During CI, the workflow downloads `resume_data_jiepeng_huang.json` from the public `BeriaL-CN/digital_resume` repository before running `npm run build`. The site still uses bundled static JSON at runtime, so visitors do not depend on GitHub raw availability after deployment.
+```bash
+npm run deploy
+```
+
+The `predeploy` script downloads `resume_data_jiepeng_huang.json` from the public `BeriaL-CN/digital_resume` repository, builds the site, and then `gh-pages` publishes only `dist` to the `gh-pages` branch. Build artifacts are not committed to `main`.
 
 ### License
 
@@ -332,9 +336,13 @@ npm run preview
 
 ### GitHub Pages 部署
 
-项目通过 `.github/workflows/deploy-pages.yml` 自动部署到 GitHub Pages。
+项目继续使用仓库原有的 `gh-pages` 分支部署方式：
 
-CI 会在执行 `npm run build` 前，从公开仓库 `BeriaL-CN/digital_resume` 下载 `resume_data_jiepeng_huang.json` 到本项目的数据目录。网站运行时仍使用构建产物中的静态 JSON，因此部署后访客访问页面不依赖 GitHub raw 文件的实时可用性。
+```bash
+npm run deploy
+```
+
+`predeploy` 会先从公开仓库 `BeriaL-CN/digital_resume` 下载 `resume_data_jiepeng_huang.json`，随后构建网站，再由 `gh-pages` 将 `dist` 内容发布到 `gh-pages` 分支。构建产物不会提交到 `main`。
 
 ### 代码检查
 
