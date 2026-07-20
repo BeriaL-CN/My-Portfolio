@@ -17,6 +17,14 @@ const markerModels = [
   'Ultra_14',
 ];
 
+const technicalExperienceCompanies = [
+  'FABC Accounting',
+  '28 Tattoo Studio',
+  'Deeproot Australia',
+  'HD Education',
+  'China Telecom',
+];
+
 const profileUrl = (resumeData, network) => (
   resumeData.basics.profiles.find((profile) => profile.network === network)?.url || ''
 );
@@ -48,6 +56,21 @@ const validateFeaturedProjects = (featuredProjects) => {
 };
 
 const highlightsText = (highlights = []) => highlights.join(' ');
+
+const formatDate = (date) => {
+  if (!date || date === 'Present') return date || '';
+  const [year, month] = date.split('-');
+  if (!year || !month) return date;
+
+  return new Intl.DateTimeFormat('en', {
+    month: 'short',
+    year: 'numeric',
+  }).format(new Date(Number(year), Number(month) - 1));
+};
+
+const formatDateRange = (startDate, endDate) => (
+  [formatDate(startDate), formatDate(endDate)].filter(Boolean).join(' - ')
+);
 
 // Optional media previews stay portfolio-only; the shared resume JSON remains content-focused.
 // Keys match resume project names so copy can still be updated from the shared source.
@@ -158,11 +181,24 @@ export const createPortfolioViewData = (resumeData) => {
     model: markerModels[index % markerModels.length],
   }));
 
+  // Keep the portfolio career story focused on technical roles instead of showing the full resume.
+  const experienceData = resumeData.work
+    .filter((experience) => technicalExperienceCompanies.includes(experience.company))
+    .map((experience, index) => ({
+      ...experience,
+      id: `experience-${index + 1}-${experience.company.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+      dateRange: formatDateRange(experience.startDate, experience.endDate),
+      highlights: experience.highlights?.length ? experience.highlights : [],
+      tags: tidyTags(experience.tags),
+      isCurrent: experience.endDate === 'Present',
+    }));
+
   return {
     resumeData,
     portfolioMeta,
     contactData,
     portfolioData,
+    experienceData,
   };
 };
 
@@ -171,4 +207,5 @@ export const fallbackPortfolioViewData = createPortfolioViewData(localResumeData
 export const portfolioMeta = fallbackPortfolioViewData.portfolioMeta;
 export const contactData = fallbackPortfolioViewData.contactData;
 export const portfolioData = fallbackPortfolioViewData.portfolioData;
+export const experienceData = fallbackPortfolioViewData.experienceData;
 export const resumeData = fallbackPortfolioViewData.resumeData;

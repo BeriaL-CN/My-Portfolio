@@ -6,6 +6,7 @@ import { OrbitControls } from '@react-three/drei';
 import { PokemonCenter } from './PokemonCenter';
 import { ProjectMarker } from './ProjectMarker';
 import { Player } from './Player';
+import { CareerComputer } from './CareerComputer';
 import * as THREE from 'three';
 
 
@@ -70,7 +71,19 @@ import * as THREE from 'three';
 // };
 
 
-const ThreeDScene = ({ portfolioData, onProjectSelect, selectedProject, onProjectClose, onExitTo2D, joystickInput, isMobile }) => {
+const ThreeDScene = ({
+  portfolioData,
+  experienceData,
+  onProjectSelect,
+  selectedProject,
+  onProjectClose,
+  onExperienceSelect,
+  selectedExperience,
+  onExperienceClose,
+  onExitTo2D,
+  joystickInput,
+  isMobile
+}) => {
   // 用于缓存可碰撞网格的状态（Hooks 必须在组件内部声明）
   const [collidableMeshes, setCollidableMeshes] = useState([]);
   const [sceneBounds, setSceneBounds] = useState(null);
@@ -165,6 +178,17 @@ const ThreeDScene = ({ portfolioData, onProjectSelect, selectedProject, onProjec
         collidableObjects={collidableMeshes} // 传递缓存的碰撞对象
         joystickInput={joystickInput} // 传递摇杆输入
         position={[0, 0, 1]} // 初始位置：位于场景中心附近，略微靠前
+      />
+
+      {/* 3. 将职业经历入口挂到场景现有电脑上，和项目精灵球形成不同交互语义 */}
+      <CareerComputer
+        experienceData={experienceData}
+        onExperienceSelect={onExperienceSelect}
+        onExperienceClose={onExperienceClose}
+        selectedExperience={selectedExperience}
+        selectedProject={selectedProject}
+        player={playerRef}
+        isMobile={isMobile}
       />
       
 

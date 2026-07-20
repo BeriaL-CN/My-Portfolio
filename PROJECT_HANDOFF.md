@@ -41,6 +41,15 @@ Latest SEO update on 2026-07-20:
 - `scripts/syncResumeData.mjs` still strips phone, visa, street/suburb, and postcode fields, but it is now an optional local/manual refresh helper rather than part of deployment.
 - Latest public resume data refresh on 2026-07-20: `src/data/public_resume_data.json` was regenerated from the local private Digital Resume JSON and sanitized before commit.
 
+Latest career experience update on 2026-07-20:
+
+- `src/data/portfolioData.js` now adapts technical work entries from `public_resume_data.json.work` into shared `experienceData`.
+- The 2D portfolio now includes an Experience section between About and Projects.
+- The 3D scene now uses a manual coordinate near the Pokemon Center `PC_02` computer as a glowing Career terminal for opening technical experience details.
+- Project details and career details are mutually exclusive overlays, and both are cleared when leaving 3D.
+- The 2D Experience timeline rail and markers are aligned through shared CSS variables.
+- The 2D navigation highlight is scroll-position driven so Experience and Projects activate correctly during manual scrolling.
+
 Deployment command:
 
 ```bash
@@ -52,6 +61,7 @@ npm run deploy
 ### Portfolio data
 
 - Profile, contact, and project copy are driven by `src/data/public_resume_data.json` rather than duplicated in components.
+- Technical career experience is also adapted from `src/data/public_resume_data.json`; the portfolio intentionally filters it to software/web/IT-relevant roles instead of showing every work entry.
 - Keep the full Digital Resume source out of this repository. If data needs to be refreshed, copy or pull `resume_data_jiepeng_huang.json` from the private Digital Resume project first, then sanitize it before replacing `public_resume_data.json`.
 - Only three featured projects are shown. Their names must exactly match `featuredProjectNames` in `src/data/portfolioData.js`:
   - `VR Architectural Interaction Prototype`
@@ -86,6 +96,15 @@ npm run deploy
 - `ThreeDScene.jsx` checks only the player's world-space `x/z` position against that footprint, with `0.2` padding.
 - Exit is allowed only after the player has been inside the bounds once, preventing an immediate exit while the model loads.
 - Both automatic boundary exit and the bottom-left view toggle use `handleExitTo2D`, which clears the selected project and joystick input.
+
+### Career experience UX
+
+- 2D experience uses a vertical, game-log style timeline that matches the existing beige/brown Pokemon Center card language.
+- Only technical roles are shown: FABC Accounting, 28 Tattoo Studio, Deeproot Australia, HD Education, and China Telecom.
+- 3D experience is not a separate board. It is manually positioned on the existing in-scene `PC_02` as a glowing terminal with a larger pulsing ring and stronger screen flicker.
+- The Career terminal opens with Space on desktop or click/tap on mobile.
+- The fixed far-away `Career` label was removed; only the proximity prompt is shown.
+- Project and career overlays must remain mutually exclusive so the 3D canvas does not stack modals.
 
 ### Public assets
 
@@ -134,12 +153,14 @@ npm run deploy
 | Area | Important files | Notes |
 |---|---|---|
 | App state and view switching | `src/App.jsx` | Owns 2D/3D mode, selected project, joystick state, and shared exit path. |
-| Resume adapter and preview metadata | `src/data/portfolioData.js` | Featured project names, validation, 3D marker mapping, media metadata. |
+| Resume adapter and preview metadata | `src/data/portfolioData.js` | Featured project names, technical experience filtering, validation, 3D marker mapping, media metadata. |
 | Bundled resume fallback | `src/data/public_resume_data.json` | Public-safe portfolio data imported by `portfolioData.js`. |
 | Resume sync | `scripts/syncResumeData.mjs` | Optional helper that downloads, validates, sanitizes, and writes the public local JSON. |
 | 2D preview interaction | `src/components/2d/ProjectCard.jsx` | Floating desktop panel and inline mobile media. |
+| 2D career experience | `src/components/2d/ExperienceSection.jsx` | Technical work timeline sourced from shared `experienceData`; marker/rail alignment is controlled in CSS variables. |
 | 2D preview styling | `src/components/2d/Portfolio2D.css` | Desktop/mobile preview behavior and responsive layout. |
 | 3D details preview | `src/components/3d/ProjectDetailsPanel.jsx` | Shared image/video presentation in 3D. |
+| 3D career terminal | `src/components/3d/CareerComputer.jsx`, `src/components/3d/ExperienceDetailsPanel.jsx` | Manually anchored PC_02 glowing interaction and fixed-close career details overlay. |
 | 3D scene boundary | `src/components/3d/PokemonCenter.jsx`, `src/components/3d/ThreeDScene.jsx` | Computes model bounds and triggers exit. |
 | Player movement/collision | `src/components/3d/Player.jsx` | TPS camera, keyboard/joystick movement, collision rays. |
 | Project markers | `src/components/3d/ProjectMarker.jsx` | Proximity, Space/click interaction, Pokeball model selection. |
@@ -152,6 +173,7 @@ npm run deploy
 
 | Group | Files |
 |---|---|
+| Career experience | `src/data/portfolioData.js`, `src/components/2d/ExperienceSection.jsx`, `src/components/2d/Portfolio2D.jsx`, `src/components/2d/PortfolioHeader.jsx`, `src/components/2d/Portfolio2D.css`, `src/components/3d/CareerComputer.jsx`, `src/components/3d/ExperienceDetailsPanel.jsx`, `src/components/3d/ThreeDScene.jsx`, `src/App.jsx` |
 | Shared data and deployment | `src/data/public_resume_data.json`, `src/data/portfolioData.js`, `scripts/syncResumeData.mjs`, `package.json` |
 | App data flow and view switching | `src/App.jsx`, `src/components/2d/Portfolio2D.jsx`, `src/components/2d/PortfolioHeader.jsx`, `src/components/2d/HomeSection.jsx`, `src/components/2d/ContactSection.jsx` |
 | 2D project details and responsive styling | `src/components/2d/ProjectCard.jsx`, `src/components/2d/Portfolio2D.css` |
@@ -174,15 +196,19 @@ There are no known required code changes left from the requests in this session.
    - Walk toward every edge/door of the Pokemon Center and confirm the `Box3` footprint matches the intended playable area.
    - If decorative geometry makes the bounding box too large, replace the full-model bounds with selected floor meshes or an explicit polygon footprint.
 
-3. **External media reliability**
+3. **3D Career terminal QA**
+   - Verify the glow is visually attached to the intended PC in both desktop and mobile 3D views.
+   - If the glow is visually awkward, adjust `CAREER_COMPUTER_POSITION` in `CareerComputer.jsx`; current target is `PC_02`.
+
+4. **External media reliability**
    - YouTube thumbnails and GitHub asset videos depend on external hosting and network availability.
    - If reliability becomes important, store approved thumbnails locally and keep external links only for playback.
 
-4. **Build size**
+5. **Build size**
    - Vite reports the Three.js vendor chunk above 500 kB. This is currently a warning, not a failure.
    - Consider lazy-loading the 3D view if initial 2D load performance becomes a concern.
 
-5. **Resume sync compatibility**
+6. **Resume sync compatibility**
    - Renaming any featured project in `digital_resume` will break exact-name matching and intentionally fail the build.
    - Update `featuredProjectNames` and the corresponding `projectPreviews` key together when a project name changes.
    - Deployment no longer auto-syncs remote resume data, so remember to manually refresh and sanitize `src/data/public_resume_data.json` when Digital Resume changes should appear here.
@@ -192,11 +218,12 @@ There are no known required code changes left from the requests in this session.
 1. Run `npm install` only if dependencies are missing, then run `npm run lint` and `npm run build`.
 2. Start the site with `npm run dev` and perform desktop/mobile visual QA of the 2D previews.
 3. Test the 3D bounds exit with keyboard and virtual joystick input.
-4. Check external video links in a deployed GitHub Pages build, where browser redirect/CORS behavior may differ from local development.
-5. If behavior is accepted, keep this handoff updated whenever preview positioning, featured project names, or deployment sync changes.
-6. After the next deployment, optionally submit `https://berial-cn.github.io/My-Portfolio/sitemap.xml` in Google Search Console to speed up discovery.
-7. If stronger privacy is desired, replace the visible email contact with a form or a non-primary alias before the next deployment.
-8. When updating resume content, manually pull/copy from the Digital Resume project, sanitize private fields, then update `src/data/public_resume_data.json`.
+4. Test the 3D Career terminal near the in-scene PC and confirm it does not overlap the project marker flow.
+5. Check external video links in a deployed GitHub Pages build, where browser redirect/CORS behavior may differ from local development.
+6. If behavior is accepted, keep this handoff updated whenever preview positioning, featured project names, career role filtering, or deployment sync changes.
+7. After the next deployment, optionally submit `https://berial-cn.github.io/My-Portfolio/sitemap.xml` in Google Search Console to speed up discovery.
+8. If stronger privacy is desired, replace the visible email contact with a form or a non-primary alias before the next deployment.
+9. When updating resume content, manually pull/copy from the Digital Resume project, sanitize private fields, then update `src/data/public_resume_data.json`.
 
 ## 7. Useful Commands
 
@@ -270,6 +297,15 @@ npm run build
 - `scripts/syncResumeData.mjs` 仍会删除 phone、visa、街道/区级地址和邮编字段，但它现在只是可选的本地/手动辅助工具，不属于部署流程。
 - 最近一次脱敏数据刷新：2026-07-20，`src/data/public_resume_data.json` 已从本地 private Digital Resume JSON 重新生成，并在提交前完成脱敏。
 
+最近职业经历更新：
+
+- `src/data/portfolioData.js` 现在会把 `public_resume_data.json.work` 中的技术相关经历适配成共享的 `experienceData`。
+- 2D 页面在 About 和 Projects 之间新增 Experience 板块。
+- 3D 场景使用手动坐标定位到 Pokemon Center 现有 `PC_02` 电脑附近，作为带发光提示的 Career 终端。
+- 项目详情和职业经历详情互斥显示；离开 3D 时会同时清理这两种浮层。
+- 2D Experience 时间线的圆点和竖线已经改为通过 CSS 变量共享中心点来对齐。
+- 2D 导航高亮改为基于滚动位置计算，Experience 和 Projects 在手动滚动时会正确激活。
+
 部署命令：
 
 ```bash
@@ -281,6 +317,7 @@ npm run deploy
 ### 作品集数据
 
 - 个人简介、联系方式和项目文案来自 `src/data/public_resume_data.json`，组件中不再重复维护这些内容。
+- 技术职业经历也来自 `src/data/public_resume_data.json`，作品集会刻意筛选软件/Web/IT 相关经历，而不是展示完整 work 列表。
 - 完整 Digital Resume 源数据不要放进这个仓库。需要更新时，先从 private Digital Resume 项目里手动 copy/pull `resume_data_jiepeng_huang.json`，脱敏后再替换 `src/data/public_resume_data.json`。
 - 当前只展示 3 个 featured projects，它们的名称必须和 `src/data/portfolioData.js` 中的 `featuredProjectNames` 完全一致：
   - `VR Architectural Interaction Prototype`
@@ -314,6 +351,15 @@ npm run deploy
 - `ThreeDScene.jsx` 只根据玩家世界坐标的 `x/z` 判断是否离开 footprint，并带 `0.2` padding。
 - 只有玩家曾经进入过模型边界后才允许自动退出，避免模型加载阶段误触发。
 - 自动边界退出和左下角视图切换按钮都走 `handleExitTo2D`，会清理选中项目和 joystick 输入。
+
+### 职业经历交互
+
+- 2D 职业经历使用竖向任务日志式时间线，并沿用现有米色/棕色 Pokemon Center 卡片语言。
+- 当前只展示技术主线经历：FABC Accounting、28 Tattoo Studio、Deeproot Australia、HD Education 和 China Telecom。
+- 3D 职业经历不使用独立公告板，而是手动定位到场景已有 `PC_02` 电脑上，显示发光屏幕、放大的脉冲环和靠近提示。
+- 桌面端靠近 Career 终端后按 Space 打开；移动端可点击/轻触终端打开。
+- 远距离固定 `Career` 标签已移除，只保留靠近后的交互提示。
+- 项目详情和职业经历详情必须保持互斥，避免 3D canvas 上堆叠多个面板。
 
 ### Public 资源
 

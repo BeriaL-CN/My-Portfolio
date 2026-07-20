@@ -6,12 +6,14 @@ import ThreeDScene from './components/3d/ThreeDScene';
 import { VirtualJoystick } from './components/3d/VirtualJoystick';
 import './App.css'; 
 import ProjectDetailsPanel from './components/3d/ProjectDetailsPanel';
+import ExperienceDetailsPanel from './components/3d/ExperienceDetailsPanel';
 import Portfolio2D from './components/2d/Portfolio2D';
 import { fallbackPortfolioViewData } from './data/portfolioData';
 
 function App() {
   const [viewMode, setViewMode] = useState('2D');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedExperience, setSelectedExperience] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [joystickInput, setJoystickInput] = useState({ x: 0, y: 0 });
   // CI updates the bundled JSON before build, so runtime stays static and reliable.
@@ -40,8 +42,21 @@ function App() {
   // Both the UI toggle and the 3D boundary exit use this path so stale overlays/input are cleared.
   const handleExitTo2D = useCallback(() => {
     setSelectedProject(null);
+    setSelectedExperience(null);
     setJoystickInput({ x: 0, y: 0 });
     setViewMode('2D');
+  }, []);
+
+  const handleProjectSelect = useCallback((project) => {
+    // Project and career overlays are mutually exclusive so 3D interactions stay readable.
+    setSelectedExperience(null);
+    setSelectedProject(project);
+  }, []);
+
+  const handleExperienceSelect = useCallback((experiencePanel) => {
+    // Career terminal details replace project details instead of stacking panels.
+    setSelectedProject(null);
+    setSelectedExperience(experiencePanel);
   }, []);
 
   const uiStyle = { 
@@ -106,9 +121,13 @@ function App() {
           >
             <ThreeDScene 
               portfolioData={portfolioViewData.portfolioData}
-              onProjectSelect={setSelectedProject}
+              experienceData={portfolioViewData.experienceData}
+              onProjectSelect={handleProjectSelect}
               selectedProject={selectedProject}
               onProjectClose={() => setSelectedProject(null)}
+              onExperienceSelect={handleExperienceSelect}
+              selectedExperience={selectedExperience}
+              onExperienceClose={() => setSelectedExperience(null)}
               onExitTo2D={handleExitTo2D}
               viewMode={viewMode}
               joystickInput={joystickInput}
@@ -126,6 +145,7 @@ function App() {
           portfolioData={portfolioViewData.portfolioData}
           portfolioMeta={portfolioViewData.portfolioMeta}
           contactData={portfolioViewData.contactData}
+          experienceData={portfolioViewData.experienceData}
         />
       )} 
       
@@ -134,6 +154,14 @@ function App() {
         <ProjectDetailsPanel 
           project={selectedProject}
           onClose={() => setSelectedProject(null)} 
+        />
+      )}
+
+      {/* 职业经历详情面板 */}
+      {selectedExperience && (
+        <ExperienceDetailsPanel
+          experiencePanel={selectedExperience}
+          onClose={() => setSelectedExperience(null)}
         />
       )}
       
