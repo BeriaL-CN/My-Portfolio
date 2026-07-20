@@ -1,0 +1,5 @@
+# SEO: allow crawlers to index the GitHub Pages project site and discover the sitemap.
+User-agent: *
+Allow: /
+
+Sitemap: https://berial-cn.github.io/My-Portfolio/sitemap.xml
