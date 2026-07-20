@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "sync:resume": "node scripts/syncResumeData.mjs",
-    "predeploy": "npm run sync:resume && npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 // src/data/portfolioData.js
-// CI refreshes this JSON from the public digital_resume repo before building.
-import localResumeData from './resume_data_jiepeng_huang.json';
+// The portfolio imports only the checked-in public-safe data file, not the full resume source.
+import localResumeData from './public_resume_data.json';
 import { assetPath } from '../utils/assetPath';
 
 // Keep the original 3D scene layout: only three project markers are displayed.

@@ -7,7 +7,7 @@
 ## 🎨 Project Overview (EN)
 
 A creative personal portfolio website built with **React** and **Vite**, featuring an immersive **3D environment** themed around a Pokemon Center, with interactive player navigation and project markers.
-Portfolio content is adapted from a JSON Resume data file, so the 2D and 3D views share the same project copy, contact links, tags, and media previews.
+Portfolio content is adapted from a public-safe JSON Resume data file, so the 2D and 3D views share the same project copy, contact links, tags, and media previews without bundling the private resume source.
 
 ### Live Demo
 
@@ -37,7 +37,7 @@ The site is deployed on GitHub Pages: https://berial-cn.github.io/My-Portfolio/
 ### Core Features
 
 - 🎨 **Dual View Modes**: Seamless switching between immersive 3D view and modern 2D portfolio view
-- 🧾 **Resume-Driven Content**: Shared project, profile, and contact data sourced from JSON Resume-style data
+- 🧾 **Resume-Driven Content**: Shared project, profile, and contact data sourced from a public-safe JSON Resume-style data file
 - 🌐 **3D Environment**: Pokemon Center themed scene rendered with Three.js (GLB models via `useGLTF`)
 - 🎮 **Third-Person Player**: Controllable character with smooth TPS camera follow, directional movement, and animation blending
 - ⌨️ **Input Controls**: Supports `W/A/S/D` and Arrow keys concurrently; Space key for project interaction
@@ -90,7 +90,7 @@ my-portfolio/
 │   │       └── useKeyboardControls.jsx # Keyboard input hook
 │   ├── data/
 │   │   ├── portfolioData.js      # Resume adapter, featured projects, and media previews
-│   │   └── resume_data_jiepeng_huang.json # JSON Resume source data
+│   │   └── public_resume_data.json # Public-safe portfolio resume data
 │   └── assets/                   # Static resources
 ├── public/
 │   ├── models/                   # 3D GLB models
@@ -176,7 +176,9 @@ The site uses the repository's existing `gh-pages` branch deployment:
 npm run deploy
 ```
 
-The `predeploy` script downloads `resume_data_jiepeng_huang.json` from the public `BeriaL-CN/digital_resume` repository, builds the site, and then `gh-pages` publishes only `dist` to the `gh-pages` branch. Build artifacts are not committed to `main`.
+`predeploy` builds the checked-in public-safe data from `src/data/public_resume_data.json`, and then `gh-pages` publishes only `dist` to the `gh-pages` branch. Build artifacts are not committed to `main`.
+
+To refresh portfolio data from the Digital Resume project, manually pull or copy `resume_data_jiepeng_huang.json` from that project, remove private fields such as phone, visa, street/suburb address, and postcode, then update `src/data/public_resume_data.json`. The optional `npm run sync:resume` helper can also download the public raw JSON and write the sanitized portfolio copy, but deployment no longer runs it automatically.
 
 ### License
 
@@ -194,7 +196,7 @@ MIT License
 ## 📋 项目概述
 
 一个创意的个人作品展示网站，基于 **React** 和 **Vite** 构建，包含一个以宝可梦中心为主题的沉浸式 **3D 环境**，玩家可以在其中自由探索并与作品标记互动。
-作品集内容由 JSON Resume 风格的数据文件统一适配，2D 和 3D 视图共用同一份项目文案、联系方式、标签和媒体预览。
+作品集内容由脱敏后的 JSON Resume 风格数据文件统一适配，2D 和 3D 视图共用同一份项目文案、联系方式、标签和媒体预览，同时不会把完整履历源文件打包进站点。
 
 ### 演示地址
 
@@ -224,7 +226,7 @@ MIT License
 ### 核心特性
 
 - 🎨 **双视图模式**：沉浸式 3D 视图与现代 2D 作品集视图无缝切换
-- 🧾 **履历数据驱动**：项目、个人简介和联系方式来自统一的 JSON Resume 数据适配层
+- 🧾 **履历数据驱动**：项目、个人简介和联系方式来自项目内脱敏后的 JSON Resume 数据适配层
 - 🌐 **3D 环境**：宝可梦中心主题场景，基于 Three.js 渲染（通过 `useGLTF` 加载 GLB 模型）
 - 🎮 **第三人称玩家**：可控制角色，平滑 TPS 相机跟随、方向移动与动画混合
 - ⌨️ **输入支持**：同时支持 `W/A/S/D`、方向键；空格键与项目标记交互
@@ -281,7 +283,7 @@ my-portfolio/
 │   │       └── useKeyboardControls.jsx # 键盘输入 Hook
 │   ├── data/
 │   │   ├── portfolioData.js      # 履历数据适配、featured projects 和媒体预览
-│   │   └── resume_data_jiepeng_huang.json # JSON Resume 源数据
+│   │   └── public_resume_data.json # 作品集使用的脱敏履历数据
 │   └── assets/                   # 静态资源
 ├── public/
 │   ├── models/                   # 3D GLB 模型文件
@@ -342,7 +344,9 @@ npm run preview
 npm run deploy
 ```
 
-`predeploy` 会先从公开仓库 `BeriaL-CN/digital_resume` 下载 `resume_data_jiepeng_huang.json`，随后构建网站，再由 `gh-pages` 将 `dist` 内容发布到 `gh-pages` 分支。构建产物不会提交到 `main`。
+`predeploy` 会使用项目内已提交的 `src/data/public_resume_data.json` 构建网站，再由 `gh-pages` 将 `dist` 内容发布到 `gh-pages` 分支。构建产物不会提交到 `main`。
+
+如果需要从 Digital Resume 项目更新数据，可以手动拉取或复制该项目里的 `resume_data_jiepeng_huang.json`，删除 phone、visa、街道/区级地址、邮编等私密字段后，再更新 `src/data/public_resume_data.json`。`npm run sync:resume` 仍可作为可选辅助脚本从公开 raw JSON 下载并写入脱敏副本，但部署流程不会自动执行它。
 
 ### 代码检查
 

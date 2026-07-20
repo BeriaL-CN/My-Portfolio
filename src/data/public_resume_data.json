@@ -3,17 +3,13 @@
     "name": "Jiepeng Huang",
     "label": "Full Stack Engineer | Technical Product Manager | IT Specialist",
     "email": "silver.h.jack@gmail.com",
-    "phone": "+61 423445623",
     "url": "https://www.linkedin.com/in/berial-huang/",
     "summary": "Forward-thinking Master of IT graduate with a strong technical foundation in Full-Stack development and Cloud infrastructure. Proven ability to architect scalable web applications and bridge the gap between complex technical backends and high-performance frontends. Seeking to leverage a GPA of 6.18/7.0 and expertise in React, Node.js, and Python to deliver reliable software solutions in a dynamic Developer role.",
     "location": {
-      "address": "Robertson",
       "city": "Brisbane",
       "region": "QLD",
-      "postalCode": "4109",
       "countryCode": "AU"
     },
-    "visa": "Temporary Graduate Visa (Subclass 485) - Full work rights",
     "profiles": [
       {
         "network": "LinkedIn",
@@ -69,6 +65,44 @@
         "Frontend Engineering: Engineered custom HTML5 and CSS3 overrides to bypass template rigidity, successfully resolving complex multi-device responsive rendering bugs and standardizing web components.",
         "Cloud Infrastructure: Administered production site deployment and domain assets on SiteGround, applying caching layers and asset compression to optimize web loading speeds and technical security.",
         "AI-Powered Workflows: Leveraged an AI-native workflow (Cursor/Claude Code) for rapid layout debugging, while utilizing generative AI tools to design high-quality digital marketing posters and media collateral."
+      ]
+    },
+    {
+      "company": "28 Tattoo Studio",
+      "position": "Web Developer / Website Migration Specialist (Freelance)",
+      "location": "Brisbane, Australia (Remote)",
+      "startDate": "2026-07",
+      "endDate": "Present",
+      "tags": [
+        "developer",
+        "freelance",
+        "frontend",
+        "cloud",
+        "seo",
+        "ai-tooling"
+      ],
+      "highlights": [
+        "Cloudflare Migration: Migrated a live client website from Bluehost to Cloudflare Workers, covering DNS transition, custom domains, static deployment, Google Workspace MX protection, and rollback planning.",
+        "Performance & Technical SEO: Generated 83 WebP assets and lazy-loaded 81 gallery images, reducing homepage transfer from 16.32MiB to 0.56MiB and improving LCP from 3.51s to 1.05s; post-launch PageSpeed reached 94 mobile / 98 desktop with SEO 100.",
+        "Analytics & AI-Assisted Delivery: Used Codex-assisted workflows plus GA4/GSC analysis to validate launch health, mark form submissions as key events, and identify the mobile booking funnel as the next optimization priority."
+      ]
+    },
+    {
+      "company": "Deeproot Australia",
+      "position": "Software Development Intern",
+      "location": "Remote / Australia",
+      "startDate": "2025-04",
+      "endDate": "2025-05",
+      "tags": [
+        "product",
+        "UX",
+        "AI",
+        "research",
+        "technical"
+      ],
+      "highlights": [
+        "Early Product Research: Compared PTE apps across AI scoring, adaptive learning, multilingual support, and user engagement.",
+        "Prototype Planning: Drafted a concise PTE app brief covering practice modules, progress tracking, and AI pronunciation feedback."
       ]
     },
     {
@@ -132,9 +166,8 @@
         "stakeholder"
       ],
       "highlights": [
-        "Managed end-to-end network reliability for 10,000+ users, ensuring 99.9% system uptime.",
-        "Acted as a key liaison for base station lease negotiations and stakeholder management.",
-        "Conducted on-site signal testing and quality analysis to resolve network dead zones."
+        "Network Operations: Supported reliability for 10,000+ users through signal testing and field issue resolution.",
+        "Technical Coordination: Liaised on base station leases and infrastructure maintenance needs."
       ]
     }
   ],
@@ -285,6 +318,7 @@
       "TypeScript",
       "SQL",
       "Docker",
+      "Cloudflare Workers",
       "GCP",
       "PyTorch",
       "Unity",
@@ -351,7 +385,9 @@
       "HTML5 & CSS3",
       "SQL & NoSQL Database",
       "CI/CD Pipelines",
-      "AI Tooling (Cursor/Claude)",
+      "AI Tooling (Codex/Cursor)",
+      "Cloudflare Workers",
+      "Technical SEO",
       "Technical Documentation"
     ]
   },
