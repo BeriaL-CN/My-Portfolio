@@ -47,6 +47,26 @@
   ],
   "work": [
     {
+      "company": "United Fortune Financial",
+      "position": "ICT Support Technician (Professional Year Internship)",
+      "location": "Queensland, Australia (Office)",
+      "startDate": "2026-08",
+      "endDate": "2026-11",
+      "tags": [
+        "developer",
+        "internship",
+        "it-support",
+        "technical",
+        "wordpress",
+        "crm",
+        "automation",
+        "local-exp"
+      ],
+      "highlights": [
+        "ICT Support Planning: Supporting Phase 1 planning for a WordPress-to-SalesTrekker lead intake workflow, including CRM structure review, Pending Review contact design, and Zapier feasibility checks."
+      ]
+    },
+    {
       "company": "FABC Accounting",
       "position": "Web Developer (Freelance)",
       "location": "Brisbane, Australia (Hybrid)",
@@ -157,8 +177,8 @@
       "company": "China Telecom",
       "position": "Internet Maintaining Manager",
       "location": "Shenzhen, China",
-      "startDate": "2018-11",
-      "endDate": "2022-12",
+      "startDate": "2019-07",
+      "endDate": "2022-04",
       "tags": [
         "developer",
         "network",

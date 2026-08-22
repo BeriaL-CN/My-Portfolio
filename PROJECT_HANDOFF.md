@@ -1,6 +1,6 @@
 # My Portfolio - Project Handoff
 
-> Updated: 2026-07-20  
+> Updated: 2026-08-22  
 > Branch: `main`  
 > Baseline commit before this document: `b5efa9a` (`Add Pokeball favicon`)  
 > Worktree status before this document: clean
@@ -23,7 +23,7 @@ npm run lint
 npm run build
 ```
 
-Latest verification on 2026-07-01:
+Latest verification on 2026-08-22:
 
 - `npm run lint`: passed.
 - `npm run build`: passed.
@@ -35,11 +35,14 @@ Latest SEO update on 2026-07-20:
 - `index.html` now includes canonical URL, title, description, robots meta, Open Graph/X preview metadata, JSON-LD Person/project structured data, and a `<noscript>` portfolio summary without detailed location metadata.
 - `public/robots.txt` allows crawler access and points to `public/sitemap.xml`.
 - `public/sitemap.xml` publishes the canonical GitHub Pages project route.
+- Google Search Console file verification was added on 2026-08-19 at `public/google80921134db668829.html`; keep the filename and contents unchanged while ownership verification is in use.
+- The Search Console verification file was deployed to GitHub Pages on 2026-08-19 and confirmed live at the expected project URL; `sitemap.xml` was also confirmed reachable.
 - `src/data/public_resume_data.json` is now the only bundled portfolio resume data file.
 - The previous `src/data/resume_data_jiepeng_huang.json` file was removed from the project to avoid keeping a file that reads like the full private resume source.
 - The Digital Resume repository is expected to be private again, so remote raw fetching should not be treated as a reliable deployment dependency.
 - `scripts/syncResumeData.mjs` still strips phone, visa, street/suburb, and postcode fields, but it is now an optional local/manual refresh helper rather than part of deployment.
-- Latest public resume data refresh on 2026-07-20: `src/data/public_resume_data.json` was regenerated from the local private Digital Resume JSON and sanitized before commit.
+- Latest public resume data refresh on 2026-08-22: `src/data/public_resume_data.json` was regenerated from the local private Digital Resume JSON and sanitized before commit.
+- The latest data refresh added the United Fortune Financial ICT Support Technician internship entry and updated the China Telecom date range.
 
 Latest career experience update on 2026-07-20:
 
@@ -221,7 +224,7 @@ There are no known required code changes left from the requests in this session.
 4. Test the 3D Career terminal near the in-scene PC and confirm it does not overlap the project marker flow.
 5. Check external video links in a deployed GitHub Pages build, where browser redirect/CORS behavior may differ from local development.
 6. If behavior is accepted, keep this handoff updated whenever preview positioning, featured project names, career role filtering, or deployment sync changes.
-7. After the next deployment, optionally submit `https://berial-cn.github.io/My-Portfolio/sitemap.xml` in Google Search Console to speed up discovery.
+7. After the next deployment, verify `https://berial-cn.github.io/My-Portfolio/google80921134db668829.html`, complete ownership verification in Google Search Console, and submit `https://berial-cn.github.io/My-Portfolio/sitemap.xml`.
 8. If stronger privacy is desired, replace the visible email contact with a form or a non-primary alias before the next deployment.
 9. When updating resume content, manually pull/copy from the Digital Resume project, sanitize private fields, then update `src/data/public_resume_data.json`.
 
@@ -291,11 +294,14 @@ npm run build
 - `<noscript>` 摘要没有包含详细地址等敏感位置数据。
 - `public/robots.txt` 允许 crawler 访问，并指向 `public/sitemap.xml`。
 - `public/sitemap.xml` 发布 GitHub Pages 的 canonical 项目路径。
+- 2026-08-19 已加入 Google Search Console 文件验证入口 `public/google80921134db668829.html`；所有权验证仍在使用期间不要修改文件名或内容。
+- 该验证文件已于 2026-08-19 发布到 GitHub Pages，并确认可从预期项目 URL 访问；`sitemap.xml` 也已确认在线。
 - `src/data/public_resume_data.json` 是当前唯一会被作品集打包的履历数据文件。
 - 旧的 `src/data/resume_data_jiepeng_huang.json` 已从项目中删除，避免在 portfolio 仓库中保留看起来像完整私有履历源的数据文件。
 - Digital Resume 仓库会改回 private，因此不要把远程 raw JSON 当作部署依赖。
 - `scripts/syncResumeData.mjs` 仍会删除 phone、visa、街道/区级地址和邮编字段，但它现在只是可选的本地/手动辅助工具，不属于部署流程。
-- 最近一次脱敏数据刷新：2026-07-20，`src/data/public_resume_data.json` 已从本地 private Digital Resume JSON 重新生成，并在提交前完成脱敏。
+- 最近一次脱敏数据刷新：2026-08-22，`src/data/public_resume_data.json` 已从本地 private Digital Resume JSON 重新生成，并在提交前完成脱敏。
+- 本次数据刷新新增 United Fortune Financial 的 ICT Support Technician 实习经历，并更新了 China Telecom 的日期范围。
 
 最近职业经历更新：
 
@@ -468,7 +474,7 @@ npm run deploy
 3. 用键盘和 virtual joystick 测试 3D 边界退出。
 4. 在 GitHub Pages 部署版本中检查外部视频链接，因为 redirect/CORS 行为可能和本地不同。
 5. 如果行为确认可接受，每次改 preview 位置、featured project 名称或部署同步逻辑时，同步更新本文档。
-6. 下次部署后，可以把 `https://berial-cn.github.io/My-Portfolio/sitemap.xml` 提交到 Google Search Console 加快收录。
+6. 下次部署后，先确认 `https://berial-cn.github.io/My-Portfolio/google80921134db668829.html` 可访问，在 Google Search Console 完成所有权验证，然后提交 `https://berial-cn.github.io/My-Portfolio/sitemap.xml`。
 7. 如果想进一步加强隐私，可以在下次部署前把公开 email 改成 contact form 或非主力邮箱。
 8. 更新履历内容时，从 private Digital Resume 项目手动 pull/copy，脱敏后再更新 `src/data/public_resume_data.json`。
 
